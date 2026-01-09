@@ -1402,3 +1402,307 @@ section {
     padding: 1rem 0;
   }
 }
+
+/* ===================================
+   Email Mockup (deitalite preview)
+   ================================= */
+.email-mockup {
+  max-width: 340px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  position: relative;
+}
+
+.email-mockup-compact .email-card {
+  border-radius: 12px 12px 0 0;
+}
+
+.email-mockup-compact .em-fade-section {
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 40%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 0%, black 40%, transparent 100%);
+}
+
+.em-fade-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent 0%, var(--color-brand) 100%);
+  pointer-events: none;
+  border-radius: 0 0 12px 12px;
+}
+
+.email-mockup .email-card {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.email-mockup .em-header {
+  background: linear-gradient(135deg, #3e573c 0%, #4a6848 100%);
+  padding: 12px 16px;
+  text-align: center;
+}
+
+.email-mockup .em-header h2 {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 2px 0;
+}
+
+.email-mockup .em-header .em-date {
+  color: rgba(255,255,255,0.85);
+  font-size: 10px;
+}
+
+.email-mockup .em-forecast {
+  padding: 12px 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.email-mockup .em-forecast-hint {
+  font-size: 8px;
+  color: #94a3b8;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.email-mockup .em-forecast-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.email-mockup .em-today {
+  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.email-mockup .em-label {
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #166534;
+  opacity: 0.7;
+  margin-bottom: 2px;
+}
+
+.email-mockup .em-status {
+  font-size: 13px;
+  font-weight: 700;
+  color: #166534;
+  margin-bottom: 2px;
+}
+
+.email-mockup .em-amount {
+  font-size: 10px;
+  color: #166534;
+  margin-bottom: 2px;
+}
+
+.email-mockup .em-pct {
+  font-size: 8px;
+  color: #166534;
+  opacity: 0.7;
+  margin-bottom: 6px;
+}
+
+.email-mockup .em-weather {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 9px;
+  color: #166534;
+}
+
+.email-mockup .em-weather-icon {
+  font-size: 12px;
+}
+
+.email-mockup .em-rain-badge {
+  display: inline-block;
+  padding: 1px 4px;
+  background: rgba(255,255,255,0.6);
+  color: #166534;
+  font-size: 7px;
+  border-radius: 6px;
+  margin-left: 2px;
+}
+
+.email-mockup .em-event {
+  margin-top: 4px;
+  font-size: 8px;
+  color: #166534;
+  opacity: 0.9;
+}
+
+.email-mockup .em-secondary {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.email-mockup .em-small {
+  background: #f8fafc;
+  border-radius: 6px;
+  padding: 8px;
+}
+
+.email-mockup .em-small .em-label {
+  color: #64748b;
+  font-size: 7px;
+  margin-bottom: 2px;
+}
+
+.email-mockup .em-small .em-status {
+  font-size: 11px;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 1px;
+}
+
+.email-mockup .em-small .em-pct {
+  font-size: 8px;
+  color: #64748b;
+}
+
+.email-mockup .em-small .em-weather {
+  color: #64748b;
+  font-size: 8px;
+  margin-top: 4px;
+}
+
+.email-mockup .em-small .em-rain-badge {
+  background: #e2e8f0;
+  color: #64748b;
+}
+
+.email-mockup .em-prep {
+  padding: 12px 10px;
+}
+
+.email-mockup .em-section-title {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #888;
+  margin-bottom: 2px;
+}
+
+.email-mockup .em-section-hint {
+  font-size: 7px;
+  color: #94a3b8;
+  margin-bottom: 8px;
+}
+
+.email-mockup .em-swatch {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  vertical-align: middle;
+}
+
+.email-mockup .em-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.email-mockup .em-cat {
+  padding: 4px 0;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 9px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.email-mockup .em-thead {
+  background: #f8fafc;
+}
+
+.email-mockup .em-thead td {
+  padding: 3px 2px;
+  font-size: 7px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: #94a3b8;
+  text-align: center;
+}
+
+.email-mockup .em-thead td:first-child {
+  text-align: left;
+  padding-left: 0;
+}
+
+.email-mockup .em-thead .em-today-col {
+  color: #64748b;
+  font-weight: 600;
+}
+
+.email-mockup .em-row td {
+  padding: 2px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 9px;
+}
+
+.email-mockup .em-row td:first-child {
+  color: #334155;
+  padding-left: 0;
+}
+
+.email-mockup .em-row td:not(:first-child) {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.email-mockup .em-cell {
+  border-radius: 4px;
+  padding: 3px 2px;
+}
+
+.email-mockup .em-cell-up {
+  background-color: #dcfce7;
+}
+
+.email-mockup .em-cell-down {
+  background-color: #fee2e2;
+}
+
+.email-mockup .em-qty {
+  font-weight: 700;
+  font-size: 10px;
+}
+
+.email-mockup .em-qty-up { color: #166534; }
+.email-mockup .em-qty-down { color: #991b1b; }
+.email-mockup .em-qty-normal { color: #1e293b; }
+
+.email-mockup .em-range {
+  font-size: 7px;
+  opacity: 0.7;
+}
+
+.email-mockup .em-qty-other {
+  font-weight: 500;
+  font-size: 9px;
+}
+
+.email-mockup .em-qty-other-up { color: #166534; }
+.email-mockup .em-qty-other-down { color: #991b1b; }
+.email-mockup .em-qty-other-normal { color: #64748b; }
+
+.email-mockup .em-range-light {
+  font-size: 6px;
+  opacity: 0.6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .email-mockup {
+    max-width: 280px;
+    margin: 0 auto;
+  }
+}
