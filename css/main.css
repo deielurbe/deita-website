@@ -212,6 +212,12 @@ a.wordmark:hover {
   border-bottom-color: var(--accent);
 }
 
+/* Current page: a persistent terracotta underline, matching the hover
+   affordance so the active section reads as distinct but not loud. */
+.nav-link.active {
+  border-bottom-color: var(--accent);
+}
+
 .nav-cta {
   margin-left: 0.25rem;
 }
@@ -375,7 +381,11 @@ main p a:not([class]):hover {
   margin-bottom: 1.25rem;
 }
 
-.section p {
+/* :where() drops the (0,1,1) descendant selector to (0,1,0) — equal to the
+   authored single-class paragraph styles (.research-subtitle, .research-scope,
+   .capability-close, .bio-lead), which then win on later source order instead
+   of being overridden here. */
+.section :where(p) {
   max-width: var(--measure);
   color: var(--soft-ink);
 }
@@ -628,26 +638,12 @@ main p a:not([class]):hover {
    16. Responsive — tablet / mobile nav
    ------------------------------------------------------------------- */
 @media (max-width: 720px) {
-  .menu-toggle {
-    display: flex;
-  }
-
-  .nav {
-    position: fixed;
-    inset: 0;
-    z-index: 90;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 2rem;
-    padding: var(--gutter);
-    background-color: var(--paper);
-    transform: translateX(100%);
-    transition: transform 0.35s var(--ease);
-  }
-
-  .nav.open {
-    transform: translateX(0);
+  /* Let the nav drop below the wordmark when it can't be collapsed into the
+     hamburger (see the scripting gate below). With JS on, the nav is taken
+     out of flow (position: fixed), so only the wordmark + toggle remain here
+     and this never wraps — behavior stays pixel-identical. */
+  .header-inner {
+    flex-wrap: wrap;
   }
 
   .nav-link {
@@ -672,6 +668,37 @@ main p a:not([class]):hover {
 
   .capability:last-child {
     border-bottom: 1px solid var(--hairline);
+  }
+}
+
+/* Off-canvas mobile nav — gated on scripting for the same reason as §15.
+   Only JS can open it, so the hiding transform and the hamburger are applied
+   only when scripting is available. With no JS (or in browsers that don't
+   support the `scripting` feature, where the query fails closed) the toggle
+   stays hidden and the three nav links render inline in the header flow,
+   wrapping under the wordmark — reachable without JS. JS-on rendering is
+   unchanged from the previous single-media version. */
+@media screen and (scripting: enabled) and (max-width: 720px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2rem;
+    padding: var(--gutter);
+    background-color: var(--paper);
+    transform: translateX(100%);
+    transition: transform 0.35s var(--ease);
+  }
+
+  .nav.open {
+    transform: translateX(0);
   }
 }
 
