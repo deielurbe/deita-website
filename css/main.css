@@ -5,6 +5,51 @@
    =================================================================== */
 
 /* -------------------------------------------------------------------
+   0. Self-hosted fonts (SIL OFL) — latin subset
+   Fraunces & Inter are variable woff2; IBM Plex Mono is static per weight.
+   ------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../fonts/fraunces-latin-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: italic;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../fonts/fraunces-latin-italic.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('../fonts/inter-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/ibm-plex-mono-latin-400.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../fonts/ibm-plex-mono-latin-500.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* -------------------------------------------------------------------
    1. Design tokens (fixed)
    ------------------------------------------------------------------- */
 :root {
@@ -13,8 +58,8 @@
   --ink: #1C1917;
   --soft-ink: #57534E;
   --hairline: #E7E0D5;
-  --accent: #B4502A;
-  --accent-deep: #8C3A1D;
+  --accent: #3e573c;
+  --accent-deep: #2c3f2b;
 
   /* Type families */
   --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
@@ -176,7 +221,7 @@ button:focus-visible {
   line-height: 1;
 }
 
-/* Editorial signature: a terracotta full stop */
+/* Editorial signature: a brand-green full stop */
 .wordmark::after {
   content: ".";
   color: var(--accent);
@@ -212,7 +257,7 @@ a.wordmark:hover {
   border-bottom-color: var(--accent);
 }
 
-/* Current page: a persistent terracotta underline, matching the hover
+/* Current page: a persistent brand-green underline, matching the hover
    affordance so the active section reads as distinct but not loud. */
 .nav-link.active {
   border-bottom-color: var(--accent);
@@ -401,7 +446,7 @@ main p a:not([class]):hover {
   padding-block: clamp(4.5rem, 9vw, 7rem);
 }
 
-/* Centerpiece marker: a single terracotta rule ahead of the label */
+/* Centerpiece marker: a single brand-green rule ahead of the label */
 .section-research .eyebrow {
   display: inline-flex;
   align-items: center;
