@@ -601,16 +601,27 @@ main p a:not([class]):hover {
 
 /* -------------------------------------------------------------------
    15. Scroll reveal
+   The hidden initial state only applies when scripting is available
+   (js/main.js adds .visible on intersection). Environments without
+   JavaScript — noscript, reader mode, non-rendering crawlers — and
+   browsers that don't support the `scripting` media feature (the
+   query then evaluates false) render everything visible and simply
+   skip the entrance animation. `screen` additionally excludes print,
+   so sections never scrolled into view still print. The
+   prefers-reduced-motion override in §18 comes later in source order
+   and therefore still wins for reduced-motion users with JS enabled.
    ------------------------------------------------------------------- */
-.animate {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
-}
+@media screen and (scripting: enabled) {
+  .animate {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  }
 
-.animate.visible {
-  opacity: 1;
-  transform: none;
+  .animate.visible {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* -------------------------------------------------------------------
