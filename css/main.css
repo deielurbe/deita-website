@@ -764,6 +764,47 @@ main p a:not([class]):hover {
 }
 
 /* -------------------------------------------------------------------
+   17b. About page photo layout
+   ------------------------------------------------------------------- */
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 3rem;
+  align-items: start;
+}
+
+.about-photo {
+  margin: 0;
+  max-width: 420px;
+}
+
+.about-photo img {
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+  border: 1px solid var(--hairline);
+}
+
+@media (min-width: 721px) {
+  .about-grid {
+    grid-template-columns: minmax(0, 66ch) minmax(240px, 320px);
+    gap: 4.5rem;
+    justify-content: space-between;
+  }
+
+  .about-photo {
+    order: 2;
+    position: sticky;
+    top: 6rem;
+    max-width: none;
+  }
+
+  .about-text {
+    order: 1;
+  }
+}
+
+/* -------------------------------------------------------------------
    18. Reduced motion
    ------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
