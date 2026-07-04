@@ -2388,7 +2388,7 @@ Figure 1: All 267 dishes whose name contains “carpaccio”, grouped by the ce
 <ul>
 <li><strong>burger kept, salad discarded</strong>, on the same test. Both are common words; the question was whether either anchors a <em>specialist</em> venue type. Burger has dominated specialists (one venue’s menu is 57% burger family); salad has none (its maximum share venue, 29%, is a Vietnamese restaurant). Same probe, opposite verdicts.</li>
 <li><strong>fish restaurant discarded, honestly.</strong> Deluxe seafood venues exist (everyone can name one), but their defining dishes are token-unreachable: oysters listed by varietal brand names, fish priced by weight. Rather than ship a family that can’t see its own members, the family was discarded and the blind spot documented as a coverage gap. The tight <code>raw_bar</code> family (oyster, ceviche, coquilles) was kept instead.</li>
-<li><strong>hot pot dropped by its own verification step</strong>, after being provisionally added: the candidate venues turned out invisible for the same by-parts-pricing reason. Adding a family is cheap; keeping a family that can’t detect its members is a silent error.</li>
+<li><strong>hot pot dropped by its own verification step</strong>, after an initial add: the candidate venues turned out invisible for the same by-parts-pricing reason. Adding a family is cheap; keeping a family that can’t detect its members is a silent error.</li>
 </ul>
 <p>The vocabulary is locked but extensible: a later audit added <code>korean</code> and <code>argentinian</code> (families 23 and 24), re-stratifying 9 venues and leaving every downstream result unchanged.</p>
 </section>
