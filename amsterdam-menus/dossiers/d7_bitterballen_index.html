@@ -2264,6 +2264,34 @@ border-color: var(--hairline);
 background: var(--paper);
 font-family: 'Inter', -apple-system, sans-serif;
 }
+
+.deita-strip {
+display: flex;
+justify-content: space-between;
+align-items: baseline;
+padding: 0.8rem 1.25rem;
+border-bottom: 1px solid var(--hairline);
+}
+.deita-strip a { text-decoration: none; }
+.deita-strip-wordmark {
+font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
+font-optical-sizing: auto;
+font-weight: 600;
+font-size: 1.25rem;
+letter-spacing: -0.02em;
+line-height: 1;
+color: var(--ink);
+}
+.deita-strip-wordmark::after {
+content: ".";
+color: var(--accent);
+}
+.deita-strip-wordmark:hover { color: var(--accent); }
+.deita-strip-link {
+font-size: 0.9rem;
+color: var(--soft-ink);
+}
+.deita-strip-link:hover { color: var(--accent); }
 </style>
 </head>
 
@@ -2286,6 +2314,10 @@ font-family: 'Inter', -apple-system, sans-serif;
 </nav>
 </div>
 <main class="content" id="quarto-document-content">
+<div class="deita-strip">
+  <a class="deita-strip-wordmark" href="https://deita.eu/">deita</a>
+  <a class="deita-strip-link" href="https://deita.eu/about.html">About</a>
+</div>
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
