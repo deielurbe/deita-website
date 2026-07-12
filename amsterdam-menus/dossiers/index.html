@@ -2207,6 +2207,7 @@ color: var(--ink);
 table, .table { border-color: var(--hairline); }
 .table > :not(caption) > * > * { background-color: transparent; }
 thead { border-bottom: 2px solid var(--hairline); }
+
 blockquote {
 border-left: 3px solid var(--hairline);
 color: var(--soft-ink);
@@ -2297,6 +2298,7 @@ color: var(--soft-ink);
 
 <p>The methods and evidence behind <a href="https://deita.eu/amsterdam-menus/"><em>The tourist trap costs 85 cents</em></a>: seven dossiers, each written as the investigation it was, with the stress tests visible. Corpus: <strong>Snapshot · June 2026</strong>, ~900 priced venues, roughly 4 in 10 of Amsterdam’s ~2,028 restaurants.</p>
 <p><strong>How the dossiers fit together.</strong> D1 gives every dish an address (the coordinate system). D3 prices each address: a typical and a 90% range. D4 splits all price variation into dish-type (59%), venue (17%) and item noise (24%); <strong>D3’s ranges are exactly D4’s non-dish 41%, displayed cell by cell</strong> (see D4, “the ladder and the rungs”). D5 shows the location slice of the venue part is real but small (+4.2%/SD), and D7 confirms it with a model-free commodity check. D6 splits the venue part further: two fanciness registers, with the premium concentrating where no reference price exists. D2 is the venue typology underneath, honest about being infrastructure. One corpus, one decomposition, seven views.</p>
+<div id="dossier-list">
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -2343,6 +2345,12 @@ color: var(--soft-ink);
 </tr>
 </tbody>
 </table>
+</div>
+<style>
+
+#dossier-list table td:first-child,
+#dossier-list table th:first-child { white-space: nowrap; }
+</style>
 
 </main>
 <!-- /main column -->
