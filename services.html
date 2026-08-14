@@ -1,13 +1,613 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="refresh" content="0; url=/">
-  <link rel="canonical" href="https://deita.eu/">
-  <title>deita</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advisory · Dei M. Elurbe | deita</title>
+  <meta name="description" content="Advisory for companies that build products on hospitality data. The published Amsterdam menus study, the questions work like it answers, and how to bring yours. Scope and price always arrive in writing.">
+  <meta property="og:title" content="Advisory · Dei M. Elurbe | deita">
+  <meta property="og:description" content="Advisory for companies that build products on hospitality data. The published work, the questions it answers, and how to bring yours.">
+  <meta property="og:url" content="https://deita.eu/services.html">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://deita.eu/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+
+  <!-- Page-local styles. Uses only the tokens defined in css/main.css.
+       If these patterns get reused, lift this block into css/main.css as a
+       new section and delete it here. Nothing below overrides shared rules. -->
+  <style>
+    /* Shared note block */
+    .offer-note {
+      margin-top: 3.25rem;
+      padding-top: 1.6rem;
+      border-top: 1px solid var(--hairline);
+    }
+
+    /* Questions I take on */
+    .qa-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+      gap: 2.5rem clamp(1.5rem, 4vw, 3.5rem);
+      margin-top: 2.5rem;
+    }
+
+    .qa {
+      border-top: 1px solid var(--hairline);
+      padding-top: 1.1rem;
+    }
+
+    .qa-for {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--soft-ink);
+      margin-bottom: 0.85rem;
+    }
+
+    .qa-q {
+      font-family: var(--font-display);
+      font-optical-sizing: auto;
+      font-weight: 500;
+      font-size: 1.45rem;
+      line-height: 1.2;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      margin-bottom: 0.6rem;
+    }
+
+    .qa p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--soft-ink);
+    }
+
+    /* Proof of work */
+    .proof-list {
+      display: flex;
+      gap: clamp(1.25rem, 3vw, 2.5rem);
+      margin-top: 2.5rem;
+      margin-bottom: 0.5rem;
+      overflow-x: auto;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 0.75rem;
+      scrollbar-width: thin;
+    }
+
+    .proof {
+      flex: 0 0 min(320px, 78vw);
+      scroll-snap-align: start;
+      border-top: 1px solid var(--hairline);
+      padding-top: 1.1rem;
+    }
+
+    .proof-hint {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--soft-ink);
+      margin-bottom: 2rem;
+    }
+
+    .proof-stamp {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--soft-ink);
+      margin-bottom: 0.85rem;
+      font-feature-settings: "tnum";
+    }
+
+    .proof-figure {
+      font-family: var(--font-display);
+      font-optical-sizing: auto;
+      font-weight: 500;
+      font-size: 1.45rem;
+      line-height: 1.2;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      margin-bottom: 0.6rem;
+    }
+
+    .proof p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--soft-ink);
+    }
+
+    /* Inline visuals */
+    .proof-viz {
+      margin: 0.5rem 0 0.75rem;
+    }
+
+    .offer-viz {
+      max-width: var(--measure);
+      margin-top: 1.6rem;
+    }
+
+    .offer-viz svg,
+    .proof-viz svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .viz-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      fill: var(--soft-ink);
+    }
+
+    .viz-strong {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      fill: var(--ink);
+    }
+
+    /* How work starts */
+    .steps-list {
+      list-style: none;
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      counter-reset: step;
+    }
+
+    .steps-list li {
+      position: relative;
+      padding-left: 2.4rem;
+      counter-increment: step;
+      color: var(--ink);
+    }
+
+    .steps-list li + li {
+      margin-top: 0.9rem;
+    }
+
+    .steps-list li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0.1em;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--accent);
+    }
+
+    /* Breathing room above link rows (main.css sets none) */
+    .research-links {
+      margin-top: 2.25rem;
+    }
+
+    #atlas .hero-actions,
+    #deitalite .hero-actions {
+      margin-top: 2.25rem;
+    }
+
+    /* deitalite email excerpt */
+    .dl-mock {
+      max-width: var(--measure);
+      margin-top: 1.6rem;
+      border: 1px solid var(--hairline);
+      border-radius: 8px;
+      background: #F3EEE5;
+      padding: 1.1rem 1.2rem 1.2rem;
+    }
+
+    .dl-mock-meta {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--soft-ink);
+      margin-bottom: 0.4rem;
+    }
+
+    .dl-mock-headline {
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      color: var(--ink);
+      margin-bottom: 0.9rem;
+    }
+
+    .dl-mock table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    .dl-mock th {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--soft-ink);
+      text-align: left;
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .dl-mock td {
+      padding: 0.34rem 0.5rem;
+      border-bottom: 1px solid var(--hairline);
+      color: var(--ink);
+    }
+
+    .dl-mock tr:last-child td {
+      border-bottom: none;
+    }
+
+    .dl-cat td {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--soft-ink);
+      border-bottom: none;
+      padding-top: 0.7rem;
+    }
+
+    .dl-qty {
+      font-family: var(--font-mono);
+      font-weight: 500;
+    }
+
+    .dl-range {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--soft-ink);
+      white-space: nowrap;
+    }
+
+    .dl-up { background: #e3eae2; }
+    .dl-down { background: #efe8db; }
+
+    .dl-mock-hint {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--soft-ink);
+      margin-top: 0.65rem;
+    }
+
+    .dl-swatch {
+      display: inline-block;
+      width: 0.7em;
+      height: 0.7em;
+      border-radius: 2px;
+      margin-right: 0.3em;
+    }
+
+    /* Terms */
+    .terms-list {
+      list-style: none;
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+    }
+
+    .terms-list li {
+      color: var(--ink);
+    }
+
+    .terms-list li + li {
+      margin-top: 0.7rem;
+    }
+
+  </style>
 </head>
 <body>
-  <p>This page has moved. <a href="/">Continue to deita.eu</a></p>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="wordmark">deita</a>
+      <nav class="nav" id="nav">
+        <a href="/amsterdam-menus/" class="nav-link">Research</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="services.html" class="nav-link active">Services</a>
+        <a href="mailto:dei@deita.eu" class="btn btn-primary nav-cta">Email me</a>
+      </nav>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Positioning -->
+    <section class="hero">
+      <div class="container">
+        <p class="eyebrow">Advisory · Dei M. Elurbe, PhD · Amsterdam</p>
+        <h1>Fixed scope, one price, in writing</h1>
+        <p class="hero-lead">I am a decision scientist in food and hospitality. Companies that build products on restaurant data come to me when they need answers they can defend. This page shows the work I have published, the questions work like it answers, and how to bring me yours. Whatever we agree starts on paper: the scope, the duration, and one fixed price.</p>
+      </div>
+    </section>
+
+    <!-- The work -->
+    <section class="section animate" id="work">
+      <div class="container">
+        <p class="eyebrow">The work</p>
+        <h2>The Amsterdam menus study</h2>
+        <p>In July 2026 I published a study of Amsterdam's restaurant menus: a June 2026 snapshot of 32,405 dishes across 930 venues, about 4 in 10 of the city's restaurants. It is built only from public data and a model whose one job is to refuse unfair comparisons: never a steakhouse against a snackbar, never a dessert against a main. Here are six of its findings, as the study states them.</p>
+
+        <div class="proof-list">
+          <div class="proof">
+            <p class="proof-stamp">Snapshot · June 2026</p>
+            <p class="proof-figure">An ordinary dinner: €35–38, everywhere</p>
+            <div class="proof-viz">
+              <svg viewBox="0 0 240 52" role="img" aria-label="A price band from 35 to 38 euros with dots for every part of the city all inside it, on a scale from 30 to 45 euros">
+                <line x1="10" y1="34" x2="230" y2="34" stroke="var(--hairline)" stroke-width="1"/>
+                <rect x="83" y="30" width="45" height="8" rx="4" fill="#c9d6c8"/>
+                <g fill="#3e573c">
+                  <circle cx="88" cy="34" r="4.5"/><circle cx="97" cy="34" r="4.5"/><circle cx="106" cy="34" r="4.5"/>
+                  <circle cx="115" cy="34" r="4.5"/><circle cx="123" cy="34" r="4.5"/>
+                </g>
+                <text x="105" y="18" text-anchor="middle" class="viz-strong">€35–38</text>
+                <text x="10" y="49" class="viz-label">€30</text>
+                <text x="230" y="49" text-anchor="end" class="viz-label">€45</text>
+              </svg>
+            </div>
+            <p>A standard evening out, a burrata to start, a pasta main, a cheesecake after, lands at €35 to €38 in every part of the city. No neighbourhood breaks away by more than the noise. What you pay is decided by what you order, far more than by where you sit.</p>
+          </div>
+          <div class="proof">
+            <p class="proof-stamp">Snapshot · June 2026</p>
+            <p class="proof-figure">Prices follow where tourists stay</p>
+            <div class="proof-viz">
+              <svg viewBox="0 0 240 52" role="img" aria-label="A dot at plus 4.2 percent inside a range from plus 1.8 to plus 6.6 percent, on a scale from zero to plus seven percent">
+                <line x1="10" y1="34" x2="230" y2="34" stroke="var(--hairline)" stroke-width="1"/>
+                <rect x="66.6" y="30" width="150.8" height="8" rx="4" fill="#c9d6c8"/>
+                <circle cx="142" cy="34" r="6" fill="#3e573c" stroke="#FAF7F2" stroke-width="2"/>
+                <text x="142" y="18" text-anchor="middle" class="viz-strong">+4.2%</text>
+                <text x="10" y="49" class="viz-label">0</text>
+                <text x="230" y="49" text-anchor="end" class="viz-label">+7%</text>
+              </svg>
+            </div>
+            <p>Dishes cost about 4.2% more per step up in tourist exposure (the honest range: +1.8 to +6.6). The premium follows where tourists sleep, not distance to landmarks. The study shows where it sits, not why.</p>
+          </div>
+          <div class="proof">
+            <p class="proof-stamp">Snapshot · June 2026</p>
+            <p class="proof-figure">The dish sets the price, not the venue</p>
+            <div class="proof-viz">
+              <svg viewBox="0 0 240 46" role="img" aria-label="A bar split in three: 59.5 percent the dish, 16.8 percent the venue, 23.7 percent noise">
+                <rect x="10" y="10" width="128.5" height="12" rx="4" fill="#3e573c"/>
+                <rect x="140.5" y="10" width="36.3" height="12" fill="#9a8f7d"/>
+                <rect x="178.8" y="10" width="51.2" height="12" rx="4" fill="#d9d1c3" stroke="#b9ae9d" stroke-width="1"/>
+                <text x="10" y="38" class="viz-label">dish</text>
+                <text x="140.5" y="38" class="viz-label">venue</text>
+                <text x="178.8" y="38" class="viz-label">noise</text>
+              </svg>
+            </div>
+            <p>59.5% of price variation is which dish it is; only 16.8% is which venue serves it. Most of what looks like venue pricing power is dish mix.</p>
+          </div>
+          <div class="proof">
+            <p class="proof-stamp">Snapshot · June 2026</p>
+            <p class="proof-figure">Cafés run 11.2% below the market</p>
+            <div class="proof-viz">
+              <svg viewBox="0 0 240 52" role="img" aria-label="A dot at minus 11.2 percent inside a range from minus 14.7 to minus 7.6 percent, on a scale from minus 16 percent to zero">
+                <line x1="10" y1="34" x2="230" y2="34" stroke="var(--hairline)" stroke-width="1"/>
+                <rect x="27.9" y="30" width="97.6" height="8" rx="4" fill="#c9d6c8"/>
+                <circle cx="76" cy="34" r="6" fill="#3e573c" stroke="#FAF7F2" stroke-width="2"/>
+                <text x="76" y="18" text-anchor="middle" class="viz-strong">−11.2%</text>
+                <text x="10" y="49" class="viz-label">−16%</text>
+                <text x="230" y="49" text-anchor="end" class="viz-label">0</text>
+              </svg>
+            </div>
+            <p>The same dish in a café setting prices 11.2% lower (the honest range: −14.7 to −7.6). Where you sit changes what you pay.</p>
+          </div>
+          <div class="proof">
+            <p class="proof-stamp">Snapshot · June 2026</p>
+            <p class="proof-figure">Steakhouses crowd the centre</p>
+            <div class="proof-viz">
+              <svg viewBox="0 0 260 56" role="img" aria-label="Two bars: 10.4 percent of centre venues are steakhouses, against 3.9 percent in the rest of the city">
+                <text x="50" y="18" text-anchor="end" class="viz-label">centre</text>
+                <rect x="58" y="8" width="150" height="12" rx="4" fill="#3e573c"/>
+                <text x="214" y="18" class="viz-strong">10.4%</text>
+                <text x="50" y="42" text-anchor="end" class="viz-label">rest</text>
+                <rect x="58" y="32" width="56.3" height="12" rx="4" fill="#9a8f7d"/>
+                <text x="120" y="42" class="viz-strong">3.9%</text>
+              </svg>
+            </div>
+            <p>They appear in the city centre 2.6 times as often as in the rest of the city. Knowing where a concept crowds also tells you where it is absent.</p>
+          </div>
+          <div class="proof">
+            <p class="proof-stamp">Snapshot · June 2026</p>
+            <p class="proof-figure">One bitterbal, a fourfold spread</p>
+            <div class="proof-viz">
+              <svg viewBox="0 0 240 52" role="img" aria-label="A price range for one bitterbal from 68 cents to 2 euros 67, with the median of 1 euro 33 marked">
+                <rect x="10" y="30" width="220" height="8" rx="4" fill="#c9d6c8"/>
+                <circle cx="82" cy="34" r="6" fill="#3e573c" stroke="#FAF7F2" stroke-width="2"/>
+                <text x="82" y="18" text-anchor="middle" class="viz-strong">€1.33 median</text>
+                <text x="10" y="49" class="viz-label">€0.68</text>
+                <text x="230" y="49" text-anchor="end" class="viz-label">€2.67</text>
+              </svg>
+            </div>
+            <p>The same snack at 138 venues: median €1.33 a piece, from €0.68 to €2.67. Hold the product constant and what is left is pure location.</p>
+          </div>
+        </div>
+
+        <p class="proof-hint">six snapshots · slide for more →</p>
+      </div>
+    </section>
+
+    <!-- The questions it answers -->
+    <section class="section animate" id="questions">
+      <div class="container">
+        <p class="eyebrow">From one study</p>
+        <h2>The questions it answers</h2>
+        <p>The study covers one market and one set of questions, but the method travels: any market where menus, prices and venues can be observed, and any claim that has to survive a skeptical reader. These are examples of what work like this hands you, depending on where you sit. It is work for companies on hospitality data, not for individual restaurants or restaurant groups.</p>
+
+        <div class="qa-list">
+          <div class="qa">
+            <p class="qa-for">For field-sales platforms and distributors</p>
+            <p class="qa-q">What can your reps say in front of a venue?</p>
+            <p>A price reference your people can quote: what is typical for a dish, what counts as expensive, where a venue sits against its true peers. A rep who knows the market better than the venue does starts a different conversation.</p>
+          </div>
+          <div class="qa">
+            <p class="qa-for">For companies that hold data</p>
+            <p class="qa-q">What could your data become?</p>
+            <p>POS systems, payment platforms and data providers sit on data their clients would pay to understand. I tell you which insight products yours could carry, which claims would survive a skeptical reader, and what it takes to turn a raw corpus into a dataset your team can build on.</p>
+          </div>
+          <div class="qa">
+            <p class="qa-for">For wholesalers and brands</p>
+            <p class="qa-q">Where is the white space?</p>
+            <p>Which concepts crowd which neighbourhoods, and where a category is absent, in plain counts, so you know where to point a salesforce or launch a product.</p>
+          </div>
+          <div class="qa">
+            <p class="qa-for">For anyone about to act on a number</p>
+            <p class="qa-q">Will this finding survive scrutiny?</p>
+            <p>Before you publish a number or build on one, I stress-test it the way my own published work is tested: the threat, the test, the verdict, one line each. If it breaks, better it breaks with me.</p>
+          </div>
+        </div>
+
+        <div class="offer-note">
+          <p>These are examples, not boundaries. If your question looks like none of them, ask anyway.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- The atlas -->
+    <section class="section animate" id="atlas">
+      <div class="container">
+        <p class="eyebrow">The spin-off</p>
+        <h2>The dish price atlas</h2>
+        <p>The study also left behind a tool: a browsable atlas of Amsterdam dish prices. Pick a dish, and you get the typical price and the range where 9 out of 10 land; rare dishes get a sensible range too, not a made-up one. It is the same work from a different angle: not an argument to read, a reference to use. The reference tables I build in an engagement take exactly this shape.</p>
+        <div class="offer-viz">
+          <svg viewBox="0 0 520 100" role="img" aria-label="Illustration of an atlas entry: a typical price marked inside the range where nine out of ten prices land">
+            <line x1="20" y1="62" x2="500" y2="62" stroke="var(--hairline)" stroke-width="1"/>
+            <rect x="150" y="56" width="220" height="12" rx="6" fill="#c9d6c8"/>
+            <line x1="245" y1="44" x2="245" y2="52" stroke="var(--hairline)" stroke-width="1"/>
+            <circle cx="245" cy="62" r="7" fill="#3e573c" stroke="#FAF7F2" stroke-width="2"/>
+            <text x="245" y="38" text-anchor="middle" class="viz-strong">typical</text>
+            <text x="260" y="88" text-anchor="middle" class="viz-label">9 out of 10 land in this range</text>
+          </svg>
+        </div>
+        <div class="hero-actions">
+          <a href="/amsterdam-menus/atlas/?utm_campaign=services-page" class="btn btn-primary">Browse the atlas</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Check the work -->
+    <section class="section animate" id="verify">
+      <div class="container">
+        <p class="eyebrow">Check the work</p>
+        <h2>Everything is public</h2>
+        <p>The essay makes the argument in plain language, the technical dossiers show every method and every number, and the code and data are open.</p>
+
+        <div class="research-links">
+          <a href="/amsterdam-menus/?utm_campaign=services-page" class="btn btn-primary">Read the essay</a>
+          <a href="/amsterdam-menus/dossiers/?utm_campaign=services-page" class="text-link">Methods &amp; evidence →</a>
+          <a href="https://github.com/deielurbe/amsterdam-menus" class="text-link" target="_blank" rel="noopener">Code &amp; data →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- deitalite -->
+    <section class="section animate" id="deitalite">
+      <div class="container">
+        <p class="eyebrow">The other half of the practice</p>
+        <h2>deitalite</h2>
+        <p>The menus study is one half of what I do. The other half is <a href="https://deitalite.eu" class="text-link" target="_blank" rel="noopener">deitalite</a>, a demand forecasting system for restaurants that I designed, built, and run.</p>
+        <div class="dl-mock" role="figure" aria-label="An excerpt of the deitalite daily email: a three-day prep table with a forecast and a range for each dish, example numbers">
+          <p class="dl-mock-meta">Thursday · dinner service · 16:00–21:00</p>
+          <p class="dl-mock-headline">27 (19–35) transactions</p>
+          <table>
+            <tr><th></th><th>Thu</th><th>Fri</th><th>Sat</th></tr>
+            <tr class="dl-cat"><td colspan="4">Starters</td></tr>
+            <tr>
+              <td>Ceviche</td>
+              <td><span class="dl-qty">6</span> <span class="dl-range">4–8</span></td>
+              <td class="dl-up"><span class="dl-qty">12</span> <span class="dl-range">10–14</span></td>
+              <td><span class="dl-qty">10</span> <span class="dl-range">8–12</span></td>
+            </tr>
+            <tr>
+              <td>Caesar salad</td>
+              <td class="dl-down"><span class="dl-qty">3</span> <span class="dl-range">2–4</span></td>
+              <td class="dl-up"><span class="dl-qty">9</span> <span class="dl-range">7–11</span></td>
+              <td><span class="dl-qty">7</span> <span class="dl-range">5–9</span></td>
+            </tr>
+            <tr class="dl-cat"><td colspan="4">Mains</td></tr>
+            <tr>
+              <td>Poke bowl</td>
+              <td><span class="dl-qty">9</span> <span class="dl-range">7–11</span></td>
+              <td class="dl-up"><span class="dl-qty">18</span> <span class="dl-range">14–22</span></td>
+              <td><span class="dl-qty">14</span> <span class="dl-range">11–17</span></td>
+            </tr>
+            <tr>
+              <td>Classic burger</td>
+              <td><span class="dl-qty">7</span> <span class="dl-range">5–9</span></td>
+              <td class="dl-up"><span class="dl-qty">15</span> <span class="dl-range">12–18</span></td>
+              <td class="dl-up"><span class="dl-qty">14</span> <span class="dl-range">11–17</span></td>
+            </tr>
+          </table>
+          <p class="dl-mock-hint"><span class="dl-swatch" style="background:#e3eae2;"></span><span class="dl-swatch" style="background:#efe8db;"></span>more / less than usual for that day of the week · example numbers</p>
+        </div>
+        <ul class="terms-list">
+          <li><strong>Every morning</strong> it produces a 7-day forecast, dish by dish, with an honest range around every number: plan for 12, and a normal day lands between 8 and 16.</li>
+          <li><strong>Every change earns its place.</strong> A model change ships only if it beats the previous version on a written test, and every test result is kept.</li>
+          <li><strong>No client data has ever entered it.</strong> It runs today on development datasets.</li>
+        </ul>
+        <div class="hero-actions">
+          <a href="https://deitalite.eu" class="btn btn-primary" target="_blank" rel="noopener">Visit deitalite.eu</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- How work starts -->
+    <section class="section section-contact animate" id="contact">
+      <div class="container">
+        <p class="eyebrow">How work starts</p>
+        <h2>A rough question is enough</h2>
+        <p>I do not pitch cold and I do not run outbound, so the first step is yours. It is a smaller step than it looks: there is no sales team behind this page, only the person who does the work, happy to think along before anything is agreed.</p>
+        <ol class="steps-list">
+          <li><strong>Write me.</strong> Email or LinkedIn, whichever is easier. You do not need a polished brief: two sentences about what you are trying to decide, or about what your data will not tell you, is plenty. Within a day I tell you whether I am the right person for it. If I am not, I say so.</li>
+          <li><strong>We talk.</strong> The conversation costs nothing and commits you to nothing. Bring doubts rather than specifications; sorting them out together is what the call is for. I do not quote numbers on calls.</li>
+          <li><strong>You get a written proposal:</strong> what can be done and how, what cannot be done and why, a fixed scope, a fixed duration, and one fixed price.</li>
+          <li><strong>You decide</strong> with the document in hand, and share it with whoever needs to see it.</li>
+        </ol>
+        <p>If you are a fund, an agency or a platform looking at this for a portfolio company or a client, the same email works.</p>
+        <p>The standing terms, the same for everyone:</p>
+        <ul class="terms-list">
+          <li><strong>One engagement at a time.</strong> Start dates are agreed when the fee is agreed.</li>
+          <li><strong>Fixed fee.</strong> One number, in writing, before anything starts. No hourly billing, no overage, no surprises. If the work takes longer than I estimated, that is my risk.</li>
+          <li><strong>Payment.</strong> 50% on start, 50% on delivery. Invoiced from the Netherlands; VAT handled according to where your business is registered.</li>
+          <li><strong>Confidentiality.</strong> Your data stays yours and is used only for your engagement. It is never resold, never passed on, and never used as a case study without your written permission.</li>
+        </ul>
+        <div class="hero-actions">
+          <a href="mailto:dei@deita.eu" class="btn btn-primary">dei@deita.eu</a>
+          <a href="https://www.linkedin.com/in/deimelurbe/" class="btn btn-secondary" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+        <p class="contact-location">Amsterdam, Netherlands</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="wordmark">deita</span>
+      <nav class="footer-links">
+        <a href="mailto:dei@deita.eu">dei@deita.eu</a>
+        <a href="https://www.linkedin.com/in/deimelurbe/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://deitalite.eu" target="_blank" rel="noopener">deitalite</a>
+        <a href="privacy.html">Privacy</a>
+      </nav>
+      <span class="footer-copy">© 2026 deita · the practice of Dei M. Elurbe</span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
   <script data-goatcounter="https://deita.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
