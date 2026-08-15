@@ -20,15 +20,12 @@
 
   <!-- Page-local styles. Uses only the tokens defined in css/main.css.
        If these patterns get reused, lift them into css/main.css as a new
-       section and delete them here. Nothing below overrides shared rules. -->
+       section and delete them here. Nothing below overrides shared rules.
+       The shared viz rules (palette, mark dictionary, captions, svg sizing)
+       were lifted into css/main.css on 2026-08-15, when the atlas moved to
+       the homepage and a second page started drawing the same charts. What
+       is left here is page-specific layout only. -->
   <style>
-    /* Shared note block */
-    .offer-note {
-      margin-top: 3.25rem;
-      padding-top: 1.6rem;
-      border-top: 1px solid var(--hairline);
-    }
-
     /* Questions I take on */
     .qa-list {
       display: grid;
@@ -73,18 +70,6 @@
       font-size: 1rem;
       line-height: 1.6;
       color: var(--soft-ink);
-    }
-
-    /* Sub-head inside the questions section (the atlas block) */
-    #questions h3 {
-      font-family: var(--font-display);
-      font-optical-sizing: auto;
-      font-weight: 500;
-      font-size: 1.45rem;
-      line-height: 1.2;
-      letter-spacing: -0.015em;
-      color: var(--ink);
-      margin-bottom: 0.6rem;
     }
 
     /* Proof of work: a grid, not a scroller. Explicit tracks, not auto-fit,
@@ -168,98 +153,6 @@
       margin: 0.5rem 0 0.75rem;
     }
 
-    .offer-viz {
-      max-width: var(--measure);
-      margin-top: 1.6rem;
-    }
-
-    .offer-viz svg,
-    .proof-viz svg {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    /* The atlas figure is the one chart not bound to a card's width, so it
-       needs its own ceiling: uncapped it renders about 665px wide and its
-       labels outgrow the caption beneath them. At 520px its 9px type lands
-       at 15.6px on desktop and 10.5px on a 390px phone. */
-    .offer-viz svg {
-      max-width: 520px;
-    }
-
-    /* Chart palette. Kept page-local; css/main.css is untouched.
-       --viz-band alone is 1.41:1 on paper, far under the 3:1 that WCAG 1.4.11
-       asks of a graphic that carries meaning, and darkening the fill enough to
-       clear it would swallow the accent dot sitting on top. So the fill stays
-       pale and the 1px --viz-band-edge stroke carries the contrast (3.12:1).
-       It earns its place twice: an interval's ENDS are the information, and a
-       stroke puts a hard edge exactly where a rounded pale corner blurred one. */
-    .proof-viz,
-    .offer-viz {
-      --viz-band: #c9d6c8;
-      --viz-band-edge: #7d9078;
-      --viz-alt: #948976;
-      --viz-mute: #d9d1c3;
-    }
-
-    /* One mark dictionary across all seven figures, so the same shape never
-       means two things:
-         filled accent dot ...... a point estimate or a median
-         stroked pale band ...... an uncertainty interval, convention in the caption
-         unstroked pale fill .... a density region or a rounded headline region,
-                                  deliberately NOT an interval and never labelled
-         hairline rule .......... a reference (zero, or a headline edge)
-         bar from a baseline .... a count or a share
-         dot grid ............... an exact small count, one dot per venue */
-    .viz-label,
-    .viz-value,
-    .viz-quiet,
-    .viz-strong {
-      font-family: var(--font-mono);
-      font-feature-settings: "tnum";
-    }
-
-    .viz-label {
-      font-size: 9px;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      fill: var(--soft-ink);
-    }
-
-    .viz-value {
-      font-size: 9px;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      fill: var(--ink);
-    }
-
-    .viz-quiet {
-      font-size: 9px;
-      font-weight: 400;
-      letter-spacing: 0.02em;
-      fill: var(--soft-ink);
-    }
-
-    .viz-strong {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      fill: var(--ink);
-    }
-
-    /* Caption. Carries the uncertainty convention and the scope note, which are
-       the two things the marks cannot say for themselves. */
-    .viz-note {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      line-height: 1.55;
-      letter-spacing: 0.01em;
-      color: var(--soft-ink);
-      margin-top: 0.5rem;
-    }
-
     /* How work starts */
     .steps-list {
       list-style: none;
@@ -290,8 +183,10 @@
       color: var(--accent);
     }
 
-    .steps-list + p {
-      margin-top: 1.4rem;
+    /* The standing-terms line sits under the buttons and needs its own top
+       margin: .section :where(p) gives paragraphs none. */
+    #contact .hero-actions + p {
+      margin-top: 1.5rem;
     }
 
     /* Breathing room above link rows (main.css sets none) */
@@ -374,22 +269,42 @@
 
         <div class="proof-list">
           <div class="proof">
-            <p class="proof-stamp">Snapshot · June 2026 · 31,351 dishes · 849 venues</p>
-            <p class="proof-figure">The dish sets the price, not the venue</p>
+            <p class="proof-stamp">Snapshot · June 2026 · 4,375 dishes · 528 venues</p>
+            <p class="proof-figure">An ordinary dinner: €35–38, everywhere</p>
             <div class="proof-viz">
-              <svg viewBox="0 0 240 55" role="img" aria-label="A bar split in three: 59.5 percent of price variation is which dish it is, 16.8 percent is which venue serves it, 23.7 percent is unexplained">
-                <rect x="10.0" y="8" width="128.5" height="18" rx="2" fill="var(--accent)"/>
-                <rect x="140.5" y="8" width="36.3" height="18" rx="2" fill="var(--viz-alt)"/>
-                <rect x="178.8" y="8" width="51.2" height="18" rx="2" fill="var(--viz-mute)" stroke="var(--viz-alt)" stroke-width="1"/>
-                <text x="74.3" y="39" text-anchor="middle" class="viz-strong">59.5%</text>
-                <text x="158.7" y="39" text-anchor="middle" class="viz-strong">16.8%</text>
-                <text x="204.4" y="39" text-anchor="middle" class="viz-strong">23.7%</text>
-                <text x="74.3" y="50" text-anchor="middle" class="viz-label">dish</text>
-                <text x="158.7" y="50" text-anchor="middle" class="viz-label">venue</text>
-                <text x="204.4" y="50" text-anchor="middle" class="viz-label">noise</text>
+              <svg viewBox="0 0 240 131" role="img" aria-label="The same three-course dinner priced in seven parts of Amsterdam. All seven land within about 3 euros of each other, a tight cluster on a scale that runs from 30 to 45 euros. Bigger dots are areas with more venues.">
+                <circle cx="105.0" cy="20" r="2.34" fill="var(--accent)" stroke="var(--paper)" stroke-width="1.2"/>
+                <text x="0" y="23.5" class="viz-label">Nieuw-West</text>
+                <text x="238" y="23.5" text-anchor="end" class="viz-value">€34.5</text>
+                <circle cx="107.6" cy="31" r="2.20" fill="var(--accent)" stroke="var(--paper)" stroke-width="1.2"/>
+                <text x="0" y="34.5" class="viz-label">Zuidoost</text>
+                <text x="238" y="34.5" text-anchor="end" class="viz-value">€34.8</text>
+                <circle cx="107.6" cy="42" r="2.42" fill="var(--accent)" stroke="var(--paper)" stroke-width="1.2"/>
+                <text x="0" y="45.5" class="viz-label">Noord</text>
+                <text x="238" y="45.5" text-anchor="end" class="viz-value">€34.8</text>
+                <circle cx="113.7" cy="53" r="3.07" fill="var(--accent)" stroke="var(--paper)" stroke-width="1.2"/>
+                <text x="0" y="56.5" class="viz-label">West</text>
+                <text x="238" y="56.5" text-anchor="end" class="viz-value">€35.5</text>
+                <circle cx="126.7" cy="64" r="2.84" fill="var(--accent)" stroke="var(--paper)" stroke-width="1.2"/>
+                <text x="0" y="67.5" class="viz-label">Oost</text>
+                <text x="238" y="67.5" text-anchor="end" class="viz-value">€37.0</text>
+                <circle cx="128.4" cy="75" r="3.82" fill="var(--accent)" stroke="var(--paper)" stroke-width="1.2"/>
+                <text x="0" y="78.5" class="viz-label">Zuid</text>
+                <text x="238" y="78.5" text-anchor="end" class="viz-value">€37.2</text>
+                <circle cx="129.3" cy="86" r="4.16" fill="var(--accent)" stroke="var(--paper)" stroke-width="1.2"/>
+                <text x="0" y="89.5" class="viz-label">Centrum</text>
+                <text x="238" y="89.5" text-anchor="end" class="viz-value">€37.3</text>
+                <line x1="105.0" y1="93" x2="105.0" y2="98" stroke="var(--viz-alt)" stroke-width="1"/>
+                <line x1="129.3" y1="93" x2="129.3" y2="98" stroke="var(--viz-alt)" stroke-width="1"/>
+                <line x1="105.0" y1="98" x2="129.3" y2="98" stroke="var(--viz-alt)" stroke-width="1"/>
+                <text x="117.1" y="109" text-anchor="middle" class="viz-value">about €3</text>
+                <line x1="66.0" y1="117" x2="196.0" y2="117" stroke="var(--hairline)" stroke-width="1"/>
+                <text x="66.0" y="128" class="viz-label">€30</text>
+                <text x="196.0" y="128" text-anchor="end" class="viz-label">€45</text>
               </svg>
+              <p class="viz-note">bigger dots are areas with more venues · widest gap between areas: about €3</p>
             </div>
-            <p>59.5% of price variation is the dish; only 16.8% is the venue. Most of what looks like venue pricing power is dish mix.</p>
+            <p>Burrata, a pasta, a cheesecake: €35 to €38, in every part of the city. No area breaks away by more than the noise. The dish decides the bill; the neighbourhood barely moves it.</p>
             <a href="/amsterdam-menus/dossiers/d4_what_moves_the_price.html?utm_campaign=services-page" class="proof-methods">methods →</a>
           </div>
           <div class="proof">
@@ -509,7 +424,7 @@
           <div class="qa">
             <p class="qa-for">For field-sales platforms and distributors</p>
             <p class="qa-q">What can your reps say in front of a venue?</p>
-            <p>A price reference your people can quote: what is typical for a dish, what counts as expensive, where a venue sits against its true peers. A rep who knows the market better than the venue does starts a different conversation. The dish price atlas below is that reference, built for Amsterdam.</p>
+            <p>A price reference your people can quote: what is typical for a dish, what counts as expensive, where a venue sits against its true peers. A rep who knows the market better than the venue does starts a different conversation. The <a href="/amsterdam-menus/atlas/?utm_campaign=services-page">dish price atlas</a> is that reference, built for Amsterdam.</p>
           </div>
           <div class="qa">
             <p class="qa-for">For companies that hold data</p>
@@ -527,40 +442,6 @@
             <p>Before you publish a number or build on one, I stress-test it the way I test my own published work: the threat, the test, the verdict, one line each. If it breaks, better it breaks with me.</p>
           </div>
         </div>
-
-        <div class="offer-note">
-          <h3>The dish price atlas</h3>
-          <p>Every reference table I build in an engagement takes this shape. The atlas is the public one: pick a dish, get the typical price and the range where 9 out of 10 land; rare dishes get a sensible range too, borrowed from similar dishes rather than made up. Not an argument to read: a reference to use.</p>
-          <div class="offer-viz">
-            <svg viewBox="0 0 300 130" role="img" aria-label="Two price bands drawn on one scale. Knowing nothing about a dish, 9 in 10 Amsterdam prices land between 4 euros and 27 euros 50, about a sevenfold spread. Comparing one dish fairly, carpaccio lands between 11 euros 50 and 23 euros with a typical price of 15 euros, about twofold.">
-              <text x="40.0" y="18" class="viz-label">any dish, know nothing</text>
-              <rect x="64.6" y="26" width="144.5" height="14" rx="7" fill="var(--viz-band)" stroke="var(--viz-band-edge)" stroke-width="1"/>
-              <text x="60.6" y="36.5" text-anchor="end" class="viz-value">€4.00</text>
-              <text x="213.1" y="36.5" class="viz-value">€27.50</text>
-              <text x="252" y="36.5" class="viz-value">about 7x</text>
-              <text x="40.0" y="62" class="viz-label">carpaccio, compared fairly</text>
-              <rect x="110.7" y="70" width="70.7" height="14" rx="7" fill="var(--viz-band)" stroke="var(--viz-band-edge)" stroke-width="1"/>
-              <circle cx="132.2" cy="77" r="5.5" fill="var(--accent)" stroke="var(--paper)" stroke-width="2"/>
-              <text x="106.7" y="80.5" text-anchor="end" class="viz-value">€11.50</text>
-              <text x="185.5" y="80.5" class="viz-value">€23.00</text>
-              <text x="224" y="80.5" class="viz-value">about 2x</text>
-              <line x1="132.2" y1="84" x2="132.2" y2="92" stroke="var(--viz-band-edge)" stroke-width="1"/>
-              <text x="132.2" y="101" text-anchor="middle" class="viz-value">€15.00 typical</text>
-              <line x1="40.0" y1="112" x2="286.0" y2="112" stroke="var(--hairline)" stroke-width="1"/>
-              <line x1="40.0" y1="112" x2="40.0" y2="116" stroke="var(--hairline)" stroke-width="1"/><line x1="101.5" y1="112" x2="101.5" y2="116" stroke="var(--hairline)" stroke-width="1"/><line x1="163.0" y1="112" x2="163.0" y2="116" stroke="var(--hairline)" stroke-width="1"/><line x1="224.5" y1="112" x2="224.5" y2="116" stroke="var(--hairline)" stroke-width="1"/>
-              <text x="40.0" y="126" text-anchor="middle" class="viz-label">€0</text>
-              <text x="101.5" y="126" text-anchor="middle" class="viz-label">€10</text>
-              <text x="163.0" y="126" text-anchor="middle" class="viz-label">€20</text>
-              <text x="224.5" y="126" text-anchor="middle" class="viz-label">€30</text>
-            </svg>
-            <p class="viz-note">the top band is where 9 in 10 of all 32,405 prices land · the bottom is one atlas cell, carpaccio, from 200 dishes at 172 venues · both are 90% bands</p>
-          </div>
-          <p><a href="/amsterdam-menus/atlas/?utm_campaign=services-page" class="text-link">Browse the atlas →</a></p>
-        </div>
-
-        <div class="offer-note">
-          <p>If your question looks like none of these, ask anyway.</p>
-        </div>
       </div>
     </section>
 
@@ -576,15 +457,11 @@
           <li><strong>You get a written proposal:</strong> what can be done and how, what cannot be done and why, a fixed scope, a fixed duration, and one fixed price. The work itself arrives in writing: dossiers, reference tables, protocols, and a readout call.</li>
           <li><strong>You decide</strong> with the document in hand, and share it with whoever needs to see it.</li>
         </ol>
-        <p>Most engagements run two to six weeks, remote. If you use an NDA or a DPA, I sign yours.</p>
-        <div class="offer-note">
-          <p>If you are a fund, an agency or a platform looking at this for a portfolio company or a client, the same email works.</p>
-        </div>
         <div class="hero-actions">
           <a href="mailto:dei@deita.eu" class="btn btn-primary">dei@deita.eu</a>
           <a href="https://www.linkedin.com/in/deimelurbe/" class="btn btn-secondary" target="_blank" rel="noopener">LinkedIn</a>
         </div>
-        <p class="contact-location">Amsterdam, Netherlands</p>
+        <p>Most engagements run two to six weeks, remote. If you use an NDA or a DPA, I sign yours.</p>
       </div>
     </section>
 

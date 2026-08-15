@@ -506,6 +506,103 @@ main p a:not([class]):hover {
 }
 
 /* -------------------------------------------------------------------
+   10b. Inline study visuals
+   Shared by the services page's proof cards and the homepage atlas
+   figure. Lifted from the services page-local block 2026-08-15 when
+   the atlas moved to the homepage.
+   ------------------------------------------------------------------- */
+.offer-viz {
+  max-width: var(--measure);
+  margin-top: 1.6rem;
+}
+
+.offer-viz svg,
+.proof-viz svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* The atlas figure is not bound to a card's width, so it needs its own
+   ceiling: uncapped it renders about 665px wide and its labels outgrow
+   the caption beneath them. */
+.offer-viz svg {
+  max-width: 520px;
+}
+
+/* Chart palette. --viz-band alone is 1.41:1 on paper, far under the 3:1
+   that WCAG 1.4.11 asks of a graphic that carries meaning, so the fill
+   stays pale and the 1px --viz-band-edge stroke carries the contrast
+   (3.12:1): an interval's ENDS are the information. */
+.proof-viz,
+.offer-viz {
+  --viz-band: #c9d6c8;
+  --viz-band-edge: #7d9078;
+  --viz-alt: #948976;
+  --viz-mute: #d9d1c3;
+}
+
+/* One mark dictionary across all figures, so the same shape never means
+   two things: filled accent dot = point estimate or median; stroked pale
+   band = uncertainty interval; unstroked pale fill = density region;
+   hairline rule = reference; bar from a baseline = count or share;
+   dot grid = exact small count. */
+.viz-label,
+.viz-value,
+.viz-quiet,
+.viz-strong {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum";
+}
+
+.viz-label {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  fill: var(--soft-ink);
+}
+
+.viz-value {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  fill: var(--ink);
+}
+
+.viz-quiet {
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  fill: var(--soft-ink);
+}
+
+.viz-strong {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  fill: var(--ink);
+}
+
+/* Caption: carries the uncertainty convention and the scope note, the
+   two things the marks cannot say for themselves. */
+.viz-note {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  line-height: 1.55;
+  letter-spacing: 0.01em;
+  color: var(--soft-ink);
+  margin-top: 0.5rem;
+}
+
+/* The atlas figure ends in a caption, not a scope paragraph, so the
+   link row needs its own breathing room (main.css sets none; the
+   services page solves this with a page-local override). */
+#atlas .research-links {
+  margin-top: 2.25rem;
+}
+
+/* -------------------------------------------------------------------
    11. Capability index (What I do)
    ------------------------------------------------------------------- */
 .capability-list {
