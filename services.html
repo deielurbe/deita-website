@@ -18,12 +18,8 @@
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="apple-touch-icon" href="favicon.png">
 
-  <!-- Page-local styles. Uses only the tokens defined in css/main.css, with one
-       deliberate exception: the ".dl-embed" block near the bottom is a verbatim
-       transplant of the deitalite.eu email mockup and carries its own namespaced
-       palette (--dl-*). That block is sealed — it neither inherits from nor leaks
-       into the rest of the page.
-       If the other patterns get reused, lift them into css/main.css as a new
+  <!-- Page-local styles. Uses only the tokens defined in css/main.css.
+       If these patterns get reused, lift them into css/main.css as a new
        section and delete them here. Nothing below overrides shared rules. -->
   <style>
     /* Shared note block */
@@ -79,14 +75,35 @@
       color: var(--soft-ink);
     }
 
-    /* Proof of work — a grid, not a scroller. auto-fit holds 3 tracks at the
-       1080px container and degrades to 2 / 1 without a breakpoint, so adding a
-       7th, 8th or 9th card needs no CSS change: it simply starts a new row. */
+    /* Sub-head inside the questions section (the atlas block) */
+    #questions h3 {
+      font-family: var(--font-display);
+      font-optical-sizing: auto;
+      font-weight: 500;
+      font-size: 1.45rem;
+      line-height: 1.2;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      margin-bottom: 0.6rem;
+    }
+
+    /* Proof of work: a grid, not a scroller. Explicit tracks, not auto-fit,
+       which was observed rendering 2-up at about 1130px where 3-up was intended.
+       Rows of three hold on desktop; a further card needs no CSS change, it
+       simply starts a new row. */
     .proof-list {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 2.5rem clamp(1.5rem, 3vw, 2.25rem);
       margin-top: 2.5rem;
+    }
+
+    @media (max-width: 960px) {
+      .proof-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 640px) {
+      .proof-list { grid-template-columns: 1fr; }
     }
 
     .proof {
@@ -273,17 +290,13 @@
       color: var(--accent);
     }
 
+    .steps-list + p {
+      margin-top: 1.4rem;
+    }
+
     /* Breathing room above link rows (main.css sets none) */
     .research-links {
       margin-top: 2.25rem;
-    }
-
-    #atlas .hero-actions {
-      margin-top: 2.25rem;
-    }
-
-    .about-link {
-      margin-top: 1rem;
     }
 
     /* Standing terms — quiet closing strip below the CTA */
@@ -321,437 +334,6 @@
     .terms-list li + li {
       margin-top: 0.7rem;
     }
-
-    /* ===============================================================
-       deitalite email mockup — VERBATIM TRANSPLANT.
-       Markup and rules copied from deitaliteWebsite/index.html (the
-       `email-mockup email-mockup-compact` block) and its css/main.css.
-       Every selector is prefixed with .dl-embed and every token is
-       renamed --dl-*, so the mockup cannot inherit this page's editorial
-       typography and its palette cannot leak out. Render target: identical
-       to deitalite.eu. Do not re-palette to the deita tokens.
-       =============================================================== */
-    .dl-embed {
-      /* deitalite design tokens, namespaced */
-      --dl-font: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
-      --dl-white: #ffffff;
-      --dl-hairline: #E7E0D5;
-      --dl-brand-green: #3e573c;
-      --dl-dark-text: #1C1917;
-      --dl-shadow-mockup: 0 1px 2px rgba(28, 25, 23, 0.06), 0 8px 24px rgba(28, 25, 23, 0.08);
-      --dl-green-bg: #dcfce7;
-      --dl-green-bg-gradient: #bbf7d0;
-      --dl-green-text: #166534;
-      --dl-red-bg: #fee2e2;
-      --dl-red-text: #991b1b;
-      --dl-slate-50: #f8fafc;
-      --dl-slate-100: #f1f5f9;
-      --dl-slate-200: #e2e8f0;
-      --dl-slate-400: #94a3b8;
-      --dl-slate-500: #64748b;
-      --dl-slate-600: #475569;
-      --dl-slate-700: #334155;
-      --dl-slate-800: #1e293b;
-      --dl-neutral-500: #888;
-      --dl-border: #eee;
-
-      /* Seal against this page's inherited type (deitalite body values) */
-      font-size: 18px;
-      line-height: 1.7;
-      font-weight: 400;
-      font-style: normal;
-      letter-spacing: normal;
-      text-align: start;
-      color: var(--dl-dark-text);
-      margin: 1.6rem 0 1.75rem;
-    }
-
-    .dl-embed .email-mockup {
-      max-width: 420px;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    }
-
-    .dl-embed .email-mockup-compact {
-      position: relative;
-    }
-
-    .dl-embed .email-mockup .email-card {
-      background: var(--dl-white);
-      border-radius: 6px;
-      overflow: hidden;
-      border: 1px solid var(--dl-hairline);
-      box-shadow: var(--dl-shadow-mockup);
-    }
-
-    .dl-embed .email-mockup .em-header {
-      background: linear-gradient(135deg, var(--dl-brand-green) 0%, #4a6848 100%);
-      padding: 16px 20px;
-      text-align: center;
-    }
-
-    .dl-embed .email-mockup .em-header h2 {
-      font-family: var(--dl-font);
-      color: var(--dl-white);
-      font-size: 18px;
-      font-weight: 600;
-      margin: 0 0 4px 0;
-      /* neutralise this site's base h1,h2,h3 rule */
-      line-height: 1.3;
-      letter-spacing: -0.015em;
-      text-wrap: wrap;
-      overflow-wrap: normal;
-      hyphens: manual;
-    }
-
-    .dl-embed .email-mockup .em-header .em-service {
-      color: rgba(255,255,255,0.7);
-      font-size: 11px;
-      margin-bottom: 2px;
-    }
-
-    .dl-embed .email-mockup .em-header .em-date {
-      color: rgba(255,255,255,0.85);
-      font-size: 12px;
-    }
-
-    .dl-embed .email-mockup .em-forecast {
-      padding: 16px 14px;
-      border-bottom: 1px solid var(--dl-border);
-    }
-
-    .dl-embed .email-mockup .em-forecast-hint {
-      font-size: 9px;
-      color: var(--dl-slate-400);
-      text-align: center;
-      margin-bottom: 10px;
-    }
-
-    .dl-embed .email-mockup .em-forecast-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .dl-embed .email-mockup .em-today {
-      background: linear-gradient(135deg, var(--dl-green-bg) 0%, var(--dl-green-bg-gradient) 100%);
-      border-radius: 10px;
-      padding: 14px;
-    }
-
-    .dl-embed .email-mockup .em-today.em-card-normal {
-      background: var(--dl-slate-50);
-    }
-
-    .dl-embed .email-mockup .em-today.em-card-normal .em-label {
-      color: var(--dl-slate-500);
-    }
-
-    .dl-embed .email-mockup .em-today.em-card-normal .em-status {
-      color: var(--dl-slate-700);
-    }
-
-    .dl-embed .email-mockup .em-today.em-card-normal .em-amount,
-    .dl-embed .email-mockup .em-today.em-card-normal .em-pct {
-      color: var(--dl-slate-500);
-    }
-
-    .dl-embed .email-mockup .em-today.em-card-normal .em-weather {
-      color: var(--dl-slate-500);
-    }
-
-    .dl-embed .email-mockup .em-today.em-card-normal .em-event {
-      color: var(--dl-slate-500);
-    }
-
-    .dl-embed .email-mockup .em-small.em-card-much-busier {
-      background: linear-gradient(135deg, var(--dl-green-bg) 0%, var(--dl-green-bg-gradient) 100%);
-    }
-
-    .dl-embed .email-mockup .em-small.em-card-much-busier .em-label,
-    .dl-embed .email-mockup .em-small.em-card-much-busier .em-pct,
-    .dl-embed .email-mockup .em-small.em-card-much-busier .em-weather,
-    .dl-embed .email-mockup .em-small.em-card-much-busier .em-event {
-      color: var(--dl-green-text);
-    }
-
-    .dl-embed .email-mockup .em-small.em-card-much-busier .em-rain-badge {
-      background: rgba(255,255,255,0.6);
-      color: var(--dl-green-text);
-    }
-
-    .dl-embed .email-mockup .em-small.em-card-busier {
-      background: linear-gradient(135deg, #f0fdf4 0%, #e8f8ec 100%);
-    }
-
-    .dl-embed .email-mockup .em-small.em-card-busier .em-label,
-    .dl-embed .email-mockup .em-small.em-card-busier .em-pct,
-    .dl-embed .email-mockup .em-small.em-card-busier .em-weather {
-      color: var(--dl-green-text);
-    }
-
-    .dl-embed .email-mockup .em-small.em-card-busier .em-rain-badge {
-      background: rgba(255,255,255,0.6);
-      color: var(--dl-green-text);
-    }
-
-    .dl-embed .email-mockup .em-label {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: var(--dl-green-text);
-      opacity: 0.7;
-      margin-bottom: 4px;
-    }
-
-    .dl-embed .email-mockup .em-status {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--dl-green-text);
-      margin-bottom: 2px;
-    }
-
-    .dl-embed .email-mockup .em-amount {
-      font-size: 12px;
-      color: var(--dl-green-text);
-      margin-bottom: 2px;
-    }
-
-    .dl-embed .email-mockup .em-pct {
-      font-size: 10px;
-      color: var(--dl-green-text);
-      opacity: 0.7;
-      margin-bottom: 8px;
-    }
-
-    .dl-embed .email-mockup .em-weather {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 11px;
-      color: var(--dl-green-text);
-    }
-
-    .dl-embed .email-mockup .em-weather-icon {
-      font-size: 16px;
-    }
-
-    .dl-embed .email-mockup .em-rain-badge {
-      display: inline-block;
-      padding: 2px 6px;
-      background: rgba(255,255,255,0.6);
-      color: var(--dl-green-text);
-      font-size: 9px;
-      border-radius: 8px;
-      margin-left: 4px;
-    }
-
-    .dl-embed .email-mockup .em-event {
-      margin-top: 6px;
-      font-size: 10px;
-      color: var(--dl-green-text);
-      opacity: 0.9;
-    }
-
-    .dl-embed .email-mockup .em-secondary {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .dl-embed .email-mockup .em-small {
-      background: var(--dl-slate-50);
-      border-radius: 8px;
-      padding: 10px;
-    }
-
-    .dl-embed .email-mockup .em-small .em-label {
-      color: var(--dl-slate-500);
-      font-size: 9px;
-      margin-bottom: 3px;
-    }
-
-    .dl-embed .email-mockup .em-small .em-status {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--dl-slate-700);
-      margin-bottom: 2px;
-    }
-
-    .dl-embed .email-mockup .em-small .em-pct {
-      font-size: 10px;
-      color: var(--dl-slate-500);
-    }
-
-    .dl-embed .email-mockup .em-small .em-weather {
-      color: var(--dl-slate-500);
-      font-size: 10px;
-      margin-top: 5px;
-    }
-
-    .dl-embed .email-mockup .em-small .em-rain-badge {
-      background: var(--dl-slate-200);
-      color: var(--dl-slate-500);
-    }
-
-    .dl-embed .email-mockup .em-rain-badge-moderate {
-      background: #dbeafe;
-      color: #1e40af;
-    }
-
-    .dl-embed .email-mockup .em-status-up {
-      color: #166534;
-      font-weight: 700;
-    }
-
-    .dl-embed .email-mockup .em-small .em-status-up {
-      color: #166534;
-      font-weight: 600;
-    }
-
-    .dl-embed .email-mockup .em-prep {
-      padding: 16px 14px;
-      border-bottom: 1px solid var(--dl-border);
-    }
-
-    .dl-embed .email-mockup .em-section-title {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: var(--dl-neutral-500);
-      margin-bottom: 3px;
-    }
-
-    .dl-embed .email-mockup .em-section-hint {
-      font-size: 9px;
-      color: var(--dl-slate-400);
-      margin-bottom: 12px;
-    }
-
-    .dl-embed .email-mockup .em-swatch {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      border-radius: 2px;
-      vertical-align: middle;
-    }
-
-    .dl-embed .email-mockup .em-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .dl-embed .email-mockup .em-cat {
-      padding: 6px 0 5px 0;
-      border-bottom: 2px solid var(--dl-slate-200);
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--dl-slate-600);
-    }
-
-    .dl-embed .email-mockup .em-thead {
-      background: var(--dl-slate-50);
-    }
-
-    .dl-embed .email-mockup .em-thead td {
-      padding: 5px 3px;
-      font-size: 9px;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-      color: var(--dl-slate-400);
-      text-align: center;
-    }
-
-    .dl-embed .email-mockup .em-thead td:first-child {
-      text-align: left;
-      padding-left: 0;
-    }
-
-    .dl-embed .email-mockup .em-thead .em-today-col {
-      color: var(--dl-slate-500);
-      font-weight: 600;
-    }
-
-    .dl-embed .email-mockup .em-row td {
-      padding: 3px;
-      border-bottom: 1px solid var(--dl-slate-100);
-      font-size: 11px;
-    }
-
-    .dl-embed .email-mockup .em-row td:first-child {
-      color: var(--dl-slate-700);
-      padding-left: 0;
-    }
-
-    .dl-embed .email-mockup .em-row td:not(:first-child) {
-      text-align: center;
-      white-space: nowrap;
-    }
-
-    .dl-embed .email-mockup .em-cell {
-      border-radius: 5px;
-      padding: 5px 3px;
-    }
-
-    .dl-embed .email-mockup .em-cell-up {
-      background-color: var(--dl-green-bg);
-    }
-
-    .dl-embed .email-mockup .em-cell-down {
-      background-color: var(--dl-red-bg);
-    }
-
-    .dl-embed .email-mockup .em-qty {
-      font-weight: 700;
-      font-size: 12px;
-    }
-
-    .dl-embed .email-mockup .em-qty-up { color: var(--dl-green-text); }
-    .dl-embed .email-mockup .em-qty-down { color: var(--dl-red-text); }
-    .dl-embed .email-mockup .em-qty-normal { color: var(--dl-slate-800); }
-
-    .dl-embed .email-mockup .em-range {
-      font-size: 9px;
-      opacity: 0.7;
-    }
-
-    .dl-embed .email-mockup .em-qty-other {
-      font-weight: 500;
-      font-size: 11px;
-    }
-
-    .dl-embed .email-mockup .em-qty-other-up { color: var(--dl-green-text); }
-    .dl-embed .email-mockup .em-qty-other-normal { color: var(--dl-slate-500); }
-
-    .dl-embed .email-mockup .em-range-light {
-      font-size: 8px;
-      opacity: 0.6;
-    }
-
-    /* deitalite's own mockup breakpoint, carried verbatim */
-    @media (max-width: 768px) {
-      .dl-embed .email-mockup {
-        max-width: 100%;
-      }
-
-      .dl-embed .email-mockup .em-forecast-grid {
-        grid-template-columns: 1fr;
-        gap: 8px;
-      }
-
-      .dl-embed .email-mockup .em-today {
-        padding: 12px;
-      }
-
-      .dl-embed .email-mockup .em-secondary {
-        flex-direction: row;
-        gap: 8px;
-      }
-
-      .dl-embed .email-mockup .em-small {
-        flex: 1;
-        min-width: 0;
-      }
-    }
   </style>
 </head>
 <body>
@@ -775,7 +357,10 @@
       <div class="container">
         <p class="eyebrow">Advisory · Dei M. Elurbe, PhD · Amsterdam</p>
         <h1>Answers you can defend</h1>
-        <p class="hero-lead">I am a decision scientist for food and hospitality. POS platforms, field-sales tools, wholesalers and funds come to me when a number has to survive someone who pushes back. Not individual restaurants: companies whose customers are restaurants. Below: the published work, the questions it answers, and how to bring me yours.</p>
+        <p class="hero-lead">I am a decision scientist for food and hospitality. POS platforms, field-sales tools, wholesalers and funds come to me when a number has to survive someone who pushes back. Not individual restaurants: companies whose customers are restaurants.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="text-link">How work starts ↓</a>
+        </div>
       </div>
     </section>
 
@@ -785,29 +370,9 @@
         <p class="eyebrow">Snapshot · June 2026 · 32,405 dishes · 930 venues</p>
         <h2>The Amsterdam menus study</h2>
         <p>In July 2026 I published a study of Amsterdam's restaurant menus: a June snapshot of 32,405 dishes across 930 venues, about 4 in 10 of the city's restaurants. It is built only from public data, and all of it is public in return: the essay, the technical dossiers, the code, the data. The model has one job: refuse unfair comparisons. Never a steakhouse against a snackbar, never a dessert against a main.</p>
-        <p><a href="/amsterdam-menus/?utm_campaign=services-page" class="text-link">Read the study →</a></p>
-        <p>Six of its findings, as the study states them:</p>
+        <p>Three of its findings, as the study states them:</p>
 
         <div class="proof-list">
-          <div class="proof">
-            <p class="proof-stamp">Snapshot · June 2026 · 138 venues</p>
-            <p class="proof-figure">One bitterbal, a fourfold spread</p>
-            <div class="proof-viz">
-              <svg viewBox="0 0 240 58" role="img" aria-label="A strip of 138 individual prices for one bitterbal, clustered tightly around a median of 1 euro 33 and spanning 68 cents to 2 euros 67">
-                <rect x="69.0" y="20" width="23.0" height="22" fill="var(--viz-band)"/>
-                <path d="M18.0 25.4h.01M19.0 36.0h.01M34.0 32.4h.01M37.0 31.0h.01M42.0 38.3h.01M43.0 31.8h.01M44.0 35.8h.01M44.0 34.2h.01M46.0 32.8h.01M48.0 37.7h.01M49.0 39.1h.01M50.0 34.6h.01M50.0 39.5h.01M50.0 37.6h.01M50.0 24.9h.01M50.0 32.2h.01M50.0 25.6h.01M56.0 38.8h.01M56.0 36.6h.01M56.0 26.2h.01M57.0 24.4h.01M58.0 29.4h.01M58.0 32.6h.01M59.0 32.8h.01M62.0 28.3h.01M62.0 33.6h.01M62.0 38.9h.01M62.0 29.1h.01M62.0 30.1h.01M64.0 36.7h.01M66.0 35.1h.01M66.0 34.5h.01M67.0 33.0h.01M67.0 31.2h.01M69.0 39.0h.01M69.0 32.1h.01M69.0 33.4h.01M69.0 31.1h.01M69.0 35.5h.01M69.0 24.7h.01M69.0 31.7h.01M69.0 33.9h.01M69.0 37.4h.01M71.0 27.9h.01M71.0 27.2h.01M72.0 31.7h.01M72.0 30.9h.01M73.0 31.0h.01M74.0 33.5h.01M75.0 38.8h.01M75.0 39.4h.01M75.0 32.6h.01M75.0 39.8h.01M75.0 30.3h.01M75.0 24.1h.01M75.0 29.3h.01M77.0 26.3h.01M78.0 24.7h.01M79.0 33.4h.01M79.0 34.7h.01M79.0 38.9h.01M82.0 33.3h.01M82.0 37.8h.01M82.0 36.2h.01M82.0 32.0h.01M82.0 38.0h.01M83.0 31.0h.01M83.0 26.4h.01M83.0 31.1h.01M83.0 27.7h.01M83.0 39.4h.01M83.0 32.6h.01M83.0 28.6h.01M83.0 28.5h.01M83.0 39.9h.01M83.0 30.2h.01M83.0 38.4h.01M83.0 34.8h.01M83.0 28.5h.01M83.0 33.7h.01M83.0 36.7h.01M83.0 25.5h.01M83.0 29.0h.01M83.0 29.8h.01M83.0 31.1h.01M83.0 25.8h.01M83.0 36.5h.01M83.0 37.0h.01M83.0 31.4h.01M83.0 32.0h.01M83.0 29.5h.01M83.0 35.4h.01M87.0 26.6h.01M88.0 37.6h.01M88.0 24.7h.01M91.0 38.3h.01M92.0 35.3h.01M92.0 39.6h.01M92.0 28.8h.01M92.0 29.7h.01M92.0 28.2h.01M92.0 29.5h.01M92.0 33.8h.01M92.0 33.9h.01M92.0 36.5h.01M92.0 26.0h.01M92.0 28.0h.01M92.0 30.9h.01M92.0 26.4h.01M92.0 27.7h.01M92.0 33.7h.01M92.0 38.5h.01M93.0 28.6h.01M93.0 37.5h.01M93.0 25.9h.01M100.0 39.1h.01M100.0 28.7h.01M100.0 37.1h.01M100.0 24.4h.01M100.0 38.3h.01M100.0 37.9h.01M100.0 29.6h.01M100.0 35.2h.01M100.0 32.0h.01M100.0 31.9h.01M100.0 35.8h.01M100.0 26.1h.01M100.0 38.6h.01M108.0 33.9h.01M108.0 35.2h.01M108.0 38.3h.01M108.0 36.8h.01M108.0 37.1h.01M110.0 24.4h.01M116.0 36.6h.01M121.0 34.7h.01M188.0 35.5h.01M217.0 25.8h.01" fill="none" stroke="var(--accent)" stroke-opacity="0.45" stroke-width="3.4" stroke-linecap="round"/>
-                <line x1="83.3" y1="17" x2="83.3" y2="44" stroke="var(--accent)" stroke-width="1.25"/>
-                <text x="83.3" y="12" text-anchor="middle" class="viz-strong">€1.33 median</text>
-                <line x1="18.0" y1="42" x2="18.0" y2="47" stroke="var(--viz-alt)" stroke-width="1"/>
-                <line x1="216.7" y1="42" x2="216.7" y2="47" stroke="var(--viz-alt)" stroke-width="1"/>
-                <text x="18.0" y="55" text-anchor="middle" class="viz-label">€0.68</text>
-                <text x="216.7" y="55" text-anchor="middle" class="viz-label">€2.67</text>
-              </svg>
-              <p class="viz-note">each dot is one of 138 venues · shaded band is the middle half</p>
-            </div>
-            <p>The same snack at 138 venues: most cluster tight around €1.33, a handful climb to €2.67. Hold the product constant and what is left is pure environment: the room, the street, the crowd.</p>
-            <a href="/amsterdam-menus/dossiers/d7_bitterballen_index.html?utm_campaign=services-page" class="proof-methods">methods →</a>
-          </div>
           <div class="proof">
             <p class="proof-stamp">Snapshot · June 2026 · 31,351 dishes · 849 venues</p>
             <p class="proof-figure">The dish sets the price, not the venue</p>
@@ -825,38 +390,6 @@
               </svg>
             </div>
             <p>59.5% of price variation is the dish; only 16.8% is the venue. Most of what looks like venue pricing power is dish mix.</p>
-            <a href="/amsterdam-menus/dossiers/d4_what_moves_the_price.html?utm_campaign=services-page" class="proof-methods">methods →</a>
-          </div>
-          <div class="proof">
-            <p class="proof-stamp">Snapshot · June 2026 · 31,351 dishes · 849 venues</p>
-            <p class="proof-figure">Cafés run 11.2% below an all-rounder venue</p>
-            <div class="proof-viz">
-              <svg viewBox="0 0 240 107" role="img" aria-label="Four venue traits and what each does to the price of the same dish, with 95 percent confidence intervals: café minus 11.2 percent, specialist minus 6.2 percent, florid menu language plus 2.7 percent per step, terse ingredient-list language plus 7.3 percent">
-                <line x1="154.0" y1="6" x2="154.0" y2="88" stroke="var(--soft-ink)" stroke-width="1"/>
-                <rect x="73.2" y="17" width="39.0" height="6" rx="3" fill="var(--viz-band)" stroke="var(--viz-band-edge)" stroke-width="1"/>
-                <circle cx="92.4" cy="20" r="3.2" fill="var(--accent)" stroke="var(--paper)" stroke-width="1.5"/>
-                <text x="92.4" y="13" text-anchor="middle" class="viz-value" paint-order="stroke" stroke="var(--paper)" stroke-width="2.5">−11.2%</text>
-                <text x="0" y="23.5" class="viz-label">café</text>
-                <rect x="97.3" y="37" width="46.8" height="6" rx="3" fill="var(--viz-band)" stroke="var(--viz-band-edge)" stroke-width="1"/>
-                <circle cx="119.9" cy="40" r="3.2" fill="var(--accent)" stroke="var(--paper)" stroke-width="1.5"/>
-                <text x="119.9" y="33" text-anchor="middle" class="viz-value" paint-order="stroke" stroke="var(--paper)" stroke-width="2.5">−6.2%</text>
-                <text x="0" y="43.5" class="viz-label">specialist</text>
-                <rect x="157.8" y="57" width="22.6" height="6" rx="3" fill="var(--viz-band)" stroke="var(--viz-band-edge)" stroke-width="1"/>
-                <circle cx="168.8" cy="60" r="3.2" fill="var(--accent)" stroke="var(--paper)" stroke-width="1.5"/>
-                <text x="168.8" y="53" text-anchor="middle" class="viz-value" paint-order="stroke" stroke="var(--paper)" stroke-width="2.5">+2.7% per step</text>
-                <text x="0" y="63.5" class="viz-label">florid</text>
-                <rect x="160.6" y="77" width="69.8" height="6" rx="3" fill="var(--viz-band)" stroke="var(--viz-band-edge)" stroke-width="1"/>
-                <circle cx="194.2" cy="80" r="3.2" fill="var(--accent)" stroke="var(--paper)" stroke-width="1.5"/>
-                <text x="194.2" y="73" text-anchor="middle" class="viz-value" paint-order="stroke" stroke="var(--paper)" stroke-width="2.5">+7.3%</text>
-                <text x="0" y="83.5" class="viz-label">terse</text>
-                <line x1="66.0" y1="92" x2="236.5" y2="92" stroke="var(--hairline)" stroke-width="1"/>
-                <text x="66.0" y="103" class="viz-label">−16%</text>
-                <text x="154.0" y="103" text-anchor="middle" class="viz-label">0</text>
-                <text x="236.5" y="103" text-anchor="end" class="viz-label">+15%</text>
-              </svg>
-              <p class="viz-note">95% confidence intervals · against an all-rounder venue in Centrum · 31,351 dishes at 849 venues</p>
-            </div>
-            <p>Against an all-rounder venue, a café setting prices the same dish 11.2% lower, and how the menu is written moves it a little further. The room nudges the bill; the dish still sets it.</p>
             <a href="/amsterdam-menus/dossiers/d4_what_moves_the_price.html?utm_campaign=services-page" class="proof-methods">methods →</a>
           </div>
           <div class="proof">
@@ -924,45 +457,6 @@
             <a href="/amsterdam-menus/dossiers/d5_tourist_tax.html?utm_campaign=services-page" class="proof-methods">methods →</a>
           </div>
           <div class="proof">
-            <p class="proof-stamp">Snapshot · June 2026 · 4,375 dishes · 528 venues</p>
-            <p class="proof-figure">An ordinary dinner: €35–38, everywhere</p>
-            <div class="proof-viz">
-              <svg viewBox="0 0 240 131" role="img" aria-label="The same three-course dinner priced in seven parts of Amsterdam. All seven land within about 3 euros of each other, a tight cluster on a scale that runs from 30 to 45 euros. Bigger dots are areas with more venues.">
-                <circle cx="105.0" cy="20" r="2.34" fill="var(--accent)" stroke="var(--paper)" stroke-width="1.2"/>
-                <text x="0" y="23.5" class="viz-label">Nieuw-West</text>
-                <text x="238" y="23.5" text-anchor="end" class="viz-value">€34.5</text>
-                <circle cx="107.6" cy="31" r="2.20" fill="var(--accent)" stroke="var(--paper)" stroke-width="1.2"/>
-                <text x="0" y="34.5" class="viz-label">Zuidoost</text>
-                <text x="238" y="34.5" text-anchor="end" class="viz-value">€34.8</text>
-                <circle cx="107.6" cy="42" r="2.42" fill="var(--accent)" stroke="var(--paper)" stroke-width="1.2"/>
-                <text x="0" y="45.5" class="viz-label">Noord</text>
-                <text x="238" y="45.5" text-anchor="end" class="viz-value">€34.8</text>
-                <circle cx="113.7" cy="53" r="3.07" fill="var(--accent)" stroke="var(--paper)" stroke-width="1.2"/>
-                <text x="0" y="56.5" class="viz-label">West</text>
-                <text x="238" y="56.5" text-anchor="end" class="viz-value">€35.5</text>
-                <circle cx="126.7" cy="64" r="2.84" fill="var(--accent)" stroke="var(--paper)" stroke-width="1.2"/>
-                <text x="0" y="67.5" class="viz-label">Oost</text>
-                <text x="238" y="67.5" text-anchor="end" class="viz-value">€37.0</text>
-                <circle cx="128.4" cy="75" r="3.82" fill="var(--accent)" stroke="var(--paper)" stroke-width="1.2"/>
-                <text x="0" y="78.5" class="viz-label">Zuid</text>
-                <text x="238" y="78.5" text-anchor="end" class="viz-value">€37.2</text>
-                <circle cx="129.3" cy="86" r="4.16" fill="var(--accent)" stroke="var(--paper)" stroke-width="1.2"/>
-                <text x="0" y="89.5" class="viz-label">Centrum</text>
-                <text x="238" y="89.5" text-anchor="end" class="viz-value">€37.3</text>
-                <line x1="105.0" y1="93" x2="105.0" y2="98" stroke="var(--viz-alt)" stroke-width="1"/>
-                <line x1="129.3" y1="93" x2="129.3" y2="98" stroke="var(--viz-alt)" stroke-width="1"/>
-                <line x1="105.0" y1="98" x2="129.3" y2="98" stroke="var(--viz-alt)" stroke-width="1"/>
-                <text x="117.1" y="109" text-anchor="middle" class="viz-value">about €3</text>
-                <line x1="66.0" y1="117" x2="196.0" y2="117" stroke="var(--hairline)" stroke-width="1"/>
-                <text x="66.0" y="128" class="viz-label">€30</text>
-                <text x="196.0" y="128" text-anchor="end" class="viz-label">€45</text>
-              </svg>
-              <p class="viz-note">bigger dots are areas with more venues · widest gap between areas: about €3</p>
-            </div>
-            <p>Burrata, a pasta, a cheesecake: €35 to €38, in every part of the city. No area breaks away by more than the noise. The dish decides the bill; the neighbourhood barely moves it.</p>
-            <a href="/amsterdam-menus/dossiers/d4_what_moves_the_price.html?utm_campaign=services-page" class="proof-methods">methods →</a>
-          </div>
-          <div class="proof">
             <p class="proof-stamp">Snapshot · June 2026 · plain counts</p>
             <p class="proof-figure">Steakhouses crowd the centre</p>
             <div class="proof-viz">
@@ -994,10 +488,10 @@
           </div>
         </div>
 
-        <p class="viz-note">Different cards use different cuts of the same June 2026 snapshot: the atlas prices dish types, so it drops package deals and per-piece artifacts (32,405 dishes, 930 venues); the tourist model runs inside the study's dining universe (34,996 dishes, 899 venues); the decomposition needs scoreable menu text and a known borough (31,351 dishes, 849 venues); the dinner basket fits nine standard dishes at venues carrying at least two of them (4,375 dishes, 528 venues); the featured trio is model-predicted from that pool. Interval conventions follow each model: 90% bands for the Bayesian tourist model and the atlas, 95% for the venue-character model.</p>
+        <p class="viz-note">Each card states its own cut of the June 2026 snapshot; the dossiers state every model's universe and interval conventions.</p>
 
         <div class="research-links">
-          <a href="/amsterdam-menus/?utm_campaign=services-page" class="btn btn-primary">Read the essay</a>
+          <a href="/amsterdam-menus/?utm_campaign=services-page" class="btn btn-primary">Read the study</a>
           <a href="/amsterdam-menus/dossiers/?utm_campaign=services-page" class="text-link">Methods &amp; evidence →</a>
           <a href="https://github.com/deielurbe/amsterdam-menus" class="text-link" target="_blank" rel="noopener">Code &amp; data →</a>
         </div>
@@ -1005,7 +499,7 @@
     </section>
 
     <!-- The questions it answers -->
-    <section class="section animate" id="questions">
+    <section class="section section-research animate" id="questions">
       <div class="container">
         <p class="eyebrow">For companies that build on restaurant data</p>
         <h2>The questions it answers</h2>
@@ -1035,161 +529,38 @@
         </div>
 
         <div class="offer-note">
+          <h3>The dish price atlas</h3>
+          <p>Every reference table I build in an engagement takes this shape. The atlas is the public one: pick a dish, get the typical price and the range where 9 out of 10 land; rare dishes get a sensible range too, borrowed from similar dishes rather than made up. Not an argument to read: a reference to use.</p>
+          <div class="offer-viz">
+            <svg viewBox="0 0 300 130" role="img" aria-label="Two price bands drawn on one scale. Knowing nothing about a dish, 9 in 10 Amsterdam prices land between 4 euros and 27 euros 50, about a sevenfold spread. Comparing one dish fairly, carpaccio lands between 11 euros 50 and 23 euros with a typical price of 15 euros, about twofold.">
+              <text x="40.0" y="18" class="viz-label">any dish, know nothing</text>
+              <rect x="64.6" y="26" width="144.5" height="14" rx="7" fill="var(--viz-band)" stroke="var(--viz-band-edge)" stroke-width="1"/>
+              <text x="60.6" y="36.5" text-anchor="end" class="viz-value">€4.00</text>
+              <text x="213.1" y="36.5" class="viz-value">€27.50</text>
+              <text x="252" y="36.5" class="viz-value">about 7x</text>
+              <text x="40.0" y="62" class="viz-label">carpaccio, compared fairly</text>
+              <rect x="110.7" y="70" width="70.7" height="14" rx="7" fill="var(--viz-band)" stroke="var(--viz-band-edge)" stroke-width="1"/>
+              <circle cx="132.2" cy="77" r="5.5" fill="var(--accent)" stroke="var(--paper)" stroke-width="2"/>
+              <text x="106.7" y="80.5" text-anchor="end" class="viz-value">€11.50</text>
+              <text x="185.5" y="80.5" class="viz-value">€23.00</text>
+              <text x="224" y="80.5" class="viz-value">about 2x</text>
+              <line x1="132.2" y1="84" x2="132.2" y2="92" stroke="var(--viz-band-edge)" stroke-width="1"/>
+              <text x="132.2" y="101" text-anchor="middle" class="viz-value">€15.00 typical</text>
+              <line x1="40.0" y1="112" x2="286.0" y2="112" stroke="var(--hairline)" stroke-width="1"/>
+              <line x1="40.0" y1="112" x2="40.0" y2="116" stroke="var(--hairline)" stroke-width="1"/><line x1="101.5" y1="112" x2="101.5" y2="116" stroke="var(--hairline)" stroke-width="1"/><line x1="163.0" y1="112" x2="163.0" y2="116" stroke="var(--hairline)" stroke-width="1"/><line x1="224.5" y1="112" x2="224.5" y2="116" stroke="var(--hairline)" stroke-width="1"/>
+              <text x="40.0" y="126" text-anchor="middle" class="viz-label">€0</text>
+              <text x="101.5" y="126" text-anchor="middle" class="viz-label">€10</text>
+              <text x="163.0" y="126" text-anchor="middle" class="viz-label">€20</text>
+              <text x="224.5" y="126" text-anchor="middle" class="viz-label">€30</text>
+            </svg>
+            <p class="viz-note">the top band is where 9 in 10 of all 32,405 prices land · the bottom is one atlas cell, carpaccio, from 200 dishes at 172 venues · both are 90% bands</p>
+          </div>
+          <p><a href="/amsterdam-menus/atlas/?utm_campaign=services-page" class="text-link">Browse the atlas →</a></p>
+        </div>
+
+        <div class="offer-note">
           <p>If your question looks like none of these, ask anyway.</p>
         </div>
-      </div>
-    </section>
-
-    <!-- The atlas -->
-    <section class="section animate" id="atlas">
-      <div class="container">
-        <p class="eyebrow">The spin-off</p>
-        <h2>The dish price atlas</h2>
-        <p>Every reference table I build in an engagement takes this shape. The atlas is the public one: pick a dish, get the typical price and the range where 9 out of 10 land; rare dishes get a sensible range too, borrowed from similar dishes rather than made up. Not an argument to read: a reference to use.</p>
-        <div class="offer-viz">
-          <svg viewBox="0 0 300 130" role="img" aria-label="Two price bands drawn on one scale. Knowing nothing about a dish, 9 in 10 Amsterdam prices land between 4 euros and 27 euros 50, about a sevenfold spread. Comparing one dish fairly, carpaccio lands between 11 euros 50 and 23 euros with a typical price of 15 euros, about twofold.">
-            <text x="40.0" y="18" class="viz-label">any dish, know nothing</text>
-            <rect x="64.6" y="26" width="144.5" height="14" rx="7" fill="var(--viz-band)" stroke="var(--viz-band-edge)" stroke-width="1"/>
-            <text x="60.6" y="36.5" text-anchor="end" class="viz-value">€4.00</text>
-            <text x="213.1" y="36.5" class="viz-value">€27.50</text>
-            <text x="252" y="36.5" class="viz-value">about 7x</text>
-            <text x="40.0" y="62" class="viz-label">carpaccio, compared fairly</text>
-            <rect x="110.7" y="70" width="70.7" height="14" rx="7" fill="var(--viz-band)" stroke="var(--viz-band-edge)" stroke-width="1"/>
-            <circle cx="132.2" cy="77" r="5.5" fill="var(--accent)" stroke="var(--paper)" stroke-width="2"/>
-            <text x="106.7" y="80.5" text-anchor="end" class="viz-value">€11.50</text>
-            <text x="185.5" y="80.5" class="viz-value">€23.00</text>
-            <text x="224" y="80.5" class="viz-value">about 2x</text>
-            <line x1="132.2" y1="84" x2="132.2" y2="92" stroke="var(--viz-band-edge)" stroke-width="1"/>
-            <text x="132.2" y="101" text-anchor="middle" class="viz-value">€15.00 typical</text>
-            <line x1="40.0" y1="112" x2="286.0" y2="112" stroke="var(--hairline)" stroke-width="1"/>
-            <line x1="40.0" y1="112" x2="40.0" y2="116" stroke="var(--hairline)" stroke-width="1"/><line x1="101.5" y1="112" x2="101.5" y2="116" stroke="var(--hairline)" stroke-width="1"/><line x1="163.0" y1="112" x2="163.0" y2="116" stroke="var(--hairline)" stroke-width="1"/><line x1="224.5" y1="112" x2="224.5" y2="116" stroke="var(--hairline)" stroke-width="1"/>
-            <text x="40.0" y="126" text-anchor="middle" class="viz-label">€0</text>
-            <text x="101.5" y="126" text-anchor="middle" class="viz-label">€10</text>
-            <text x="163.0" y="126" text-anchor="middle" class="viz-label">€20</text>
-            <text x="224.5" y="126" text-anchor="middle" class="viz-label">€30</text>
-          </svg>
-          <p class="viz-note">the top band is where 9 in 10 of all 32,405 prices land · the bottom is one atlas cell, carpaccio, from 200 dishes at 172 venues · both are 90% bands</p>
-        </div>
-        <div class="hero-actions">
-          <a href="/amsterdam-menus/atlas/?utm_campaign=services-page" class="btn btn-primary">Browse the atlas</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- deitalite -->
-    <section class="section animate" id="deitalite">
-      <div class="container">
-        <p class="eyebrow">The other half of the practice</p>
-        <h2>deitalite</h2>
-        <p>The menus study is one half of what I do. The other is <a href="https://deitalite.eu" class="text-link" target="_blank" rel="noopener">deitalite</a>: demand forecasting for restaurants. I designed it, I built it, and I run it every day. This is what it sends every morning, with example numbers:</p>
-
-        <!-- Verbatim transplant of the deitalite.eu compact email mockup.
-             Markup unchanged; CSS namespaced under .dl-embed in the style block. -->
-        <div class="dl-embed" role="figure" aria-label="An excerpt of the deitalite daily email: today's forecast with a range, the two days after it, and a three-day prep table with a forecast and a range for each dish. Example numbers.">
-          <div class="email-mockup email-mockup-compact">
-            <div class="email-card">
-              <div class="em-header">
-                <h2>Your restaurant</h2>
-                <div class="em-service">16:00 – 21:00</div>
-                <div class="em-date">Thursday, May 14, 2026</div>
-              </div>
-              <div class="em-forecast">
-                <div class="em-forecast-hint">Percentages compare to last 6 weeks</div>
-                <div class="em-forecast-grid">
-                  <div class="em-today em-card-normal">
-                    <div class="em-label">Today</div>
-                    <div class="em-status">Normal</div>
-                    <div class="em-amount">27 (19–35) transactions</div>
-                    <div class="em-pct">(+5%)</div>
-                    <div class="em-weather">
-                      <span class="em-weather-icon">🌧️</span>
-                      <span>10-15°C</span>
-                      <span class="em-rain-badge em-rain-badge-moderate">Moderate rain</span>
-                    </div>
-                    <div class="em-event">🎉 Hemelvaartsdag</div>
-                  </div>
-                  <div class="em-secondary">
-                    <div class="em-small em-card-much-busier">
-                      <div class="em-label">Fri</div>
-                      <div class="em-status em-status-up">Much busier</div>
-                      <div class="em-pct">54 (43–65) (+58%)</div>
-                      <div class="em-weather">
-                        <span class="em-weather-icon">☀️</span>
-                        <span>14-20°C</span>
-                        <span class="em-rain-badge">Mostly dry</span>
-                      </div>
-                      <div class="em-event">🌉 Brugdag</div>
-                    </div>
-                    <div class="em-small em-card-busier">
-                      <div class="em-label">Sat</div>
-                      <div class="em-status em-status-up">Busier</div>
-                      <div class="em-pct">52 (44–60) (+25%)</div>
-                      <div class="em-weather">
-                        <span class="em-weather-icon">⛅</span>
-                        <span>12-17°C</span>
-                        <span class="em-rain-badge">Mostly dry</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="em-prep">
-                <div class="em-section-title">3-Day Prep</div>
-                <div class="em-section-hint">
-                  <span class="em-swatch" style="background:#dcfce7;"></span>/<span class="em-swatch" style="background:#fee2e2;"></span> more/less than usual for that day of the week
-                </div>
-                <table class="em-table">
-                  <tr><td colspan="4" class="em-cat">Starters</td></tr>
-                  <tr class="em-thead">
-                    <td></td>
-                    <td class="em-today-col">Thu</td>
-                    <td>Fri</td>
-                    <td>Sat</td>
-                  </tr>
-                  <tr class="em-row">
-                    <td>Ceviche</td>
-                    <td><div class="em-cell"><span class="em-qty em-qty-normal">6</span><span class="em-range"> 4–8</span></div></td>
-                    <td><div class="em-cell em-cell-up"><span class="em-qty-other em-qty-other-up">12</span><span class="em-range-light"> 10–14</span></div></td>
-                    <td><div class="em-cell"><span class="em-qty-other em-qty-other-normal">10</span><span class="em-range-light"> 8–12</span></div></td>
-                  </tr>
-                  <tr class="em-row">
-                    <td>Caesar Salad</td>
-                    <td><div class="em-cell em-cell-down"><span class="em-qty em-qty-down">3</span><span class="em-range em-qty-down"> 2–4</span></div></td>
-                    <td><div class="em-cell em-cell-up"><span class="em-qty-other em-qty-other-up">9</span><span class="em-range-light"> 7–11</span></div></td>
-                    <td><div class="em-cell"><span class="em-qty-other em-qty-other-normal">7</span><span class="em-range-light"> 5–9</span></div></td>
-                  </tr>
-                  <tr class="em-row">
-                    <td>Miso Soup</td>
-                    <td><div class="em-cell em-cell-up"><span class="em-qty em-qty-up">8</span><span class="em-range em-qty-up"> 5–11</span></div></td>
-                    <td><div class="em-cell"><span class="em-qty-other em-qty-other-normal">6</span><span class="em-range-light"> 4–8</span></div></td>
-                    <td><div class="em-cell"><span class="em-qty-other em-qty-other-normal">6</span><span class="em-range-light"> 4–8</span></div></td>
-                  </tr>
-                  <tr><td colspan="4" class="em-cat" style="padding-top:12px;">Mains</td></tr>
-                  <tr class="em-thead">
-                    <td></td>
-                    <td class="em-today-col">Thu</td>
-                    <td>Fri</td>
-                    <td>Sat</td>
-                  </tr>
-                  <tr class="em-row">
-                    <td>Poke Bowl</td>
-                    <td><div class="em-cell"><span class="em-qty em-qty-normal">9</span><span class="em-range"> 7–11</span></div></td>
-                    <td><div class="em-cell em-cell-up"><span class="em-qty-other em-qty-other-up">18</span><span class="em-range-light"> 14–22</span></div></td>
-                    <td><div class="em-cell"><span class="em-qty-other em-qty-other-normal">14</span><span class="em-range-light"> 11–17</span></div></td>
-                  </tr>
-                  <tr class="em-row">
-                    <td>Classic Burger</td>
-                    <td><div class="em-cell"><span class="em-qty em-qty-normal">7</span><span class="em-range"> 5–9</span></div></td>
-                    <td><div class="em-cell em-cell-up"><span class="em-qty-other em-qty-other-up">15</span><span class="em-range-light"> 12–18</span></div></td>
-                    <td><div class="em-cell em-cell-up"><span class="em-qty-other em-qty-other-up">14</span><span class="em-range-light"> 11–17</span></div></td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <p class="about-link"><a href="https://deitalite.eu" class="text-link" target="_blank" rel="noopener">deitalite.eu →</a></p>
       </div>
     </section>
 
@@ -1214,6 +585,16 @@
           <a href="https://www.linkedin.com/in/deimelurbe/" class="btn btn-secondary" target="_blank" rel="noopener">LinkedIn</a>
         </div>
         <p class="contact-location">Amsterdam, Netherlands</p>
+      </div>
+    </section>
+
+    <!-- deitalite, credential register -->
+    <section class="section animate" id="deitalite">
+      <div class="container">
+        <p class="eyebrow">The other half of the practice</p>
+        <h2>deitalite</h2>
+        <p>The menus study is one half of what I do. The other is <strong>deitalite</strong>: demand forecasting for restaurants. I designed it, I built it, and I run it every day.</p>
+        <p><a href="https://deitalite.eu" class="text-link" target="_blank" rel="noopener">deitalite.eu →</a></p>
       </div>
     </section>
 

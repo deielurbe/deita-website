@@ -72,7 +72,6 @@
   --fs-lead: clamp(1.15rem, 1.03rem + 0.55vw, 1.4rem);
   --fs-h1: clamp(2.6rem, 1.55rem + 4.55vw, 4.2rem);
   --fs-h2: clamp(1.7rem, 1.2rem + 1.6vw, 2.4rem);
-  --fs-research: clamp(2.1rem, 1.35rem + 2.7vw, 3.15rem);
 
   /* Layout */
   --container: 1080px;
@@ -428,8 +427,8 @@ main p a:not([class]):hover {
 
 /* :where() drops the (0,1,1) descendant selector to (0,1,0) — equal to the
    authored single-class paragraph styles (.research-subtitle, .research-scope,
-   .capability-close, .bio-lead), which then win on later source order instead
-   of being overridden here. */
+   .capability-close), which then win on later source order instead of being
+   overridden here. */
 .section :where(p) {
   max-width: var(--measure);
   color: var(--soft-ink);
@@ -461,7 +460,7 @@ main p a:not([class]):hover {
 }
 
 .research-title {
-  font-size: var(--fs-research);
+  font-size: var(--fs-h2);
   line-height: 1.05;
   max-width: 18ch;
   margin-bottom: 1.5rem;
@@ -486,7 +485,7 @@ main p a:not([class]):hover {
   font-optical-sizing: auto;
   font-style: italic;
   font-weight: 400;
-  font-size: clamp(1.3rem, 1.1rem + 0.7vw, 1.65rem);
+  font-size: clamp(1.2rem, 1.05rem + 0.5vw, 1.45rem);
   line-height: 1.35;
   color: var(--ink);
   max-width: 34ch;
@@ -539,34 +538,16 @@ main p a:not([class]):hover {
 
 .capability-close {
   margin-top: 2.75rem;
-  font-size: var(--fs-lead);
+  font-size: var(--fs-body);
   line-height: 1.6;
   color: var(--ink);
   max-width: 52ch;
 }
 
 /* -------------------------------------------------------------------
-   12. Shipped / Bio / Contact specifics
+   12. Contact specifics
+   Shipped and bio prose now fall back to the default section styles (§9).
    ------------------------------------------------------------------- */
-.section-shipped p {
-  font-size: var(--fs-lead);
-  line-height: 1.6;
-  color: var(--ink);
-  max-width: 54ch;
-}
-
-.section-shipped p + p {
-  margin-top: 1.5rem;
-}
-
-.bio-lead {
-  font-size: var(--fs-lead);
-  line-height: 1.6;
-  color: var(--ink);
-  max-width: 56ch;
-  margin-bottom: 1.75rem;
-}
-
 .section-contact .hero-actions {
   margin-top: 2rem;
 }
@@ -669,8 +650,8 @@ main p a:not([class]):hover {
 @media screen and (scripting: enabled) {
   .animate {
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+    transform: translateY(12px);
+    transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
   }
 
   .animate.visible {
